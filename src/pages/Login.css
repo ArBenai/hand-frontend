@@ -1,0 +1,474 @@
+/* Basis-Styling für HTML-Elemente */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Haupt-Wrapper für die gesamte Seite */
+.login-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative; 
+    background:  #F8E8C3; 
+    overflow: hidden;
+}
+
+/* Hintergrundmuster */
+.background-pattern-container {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05; /* Sehr schwach, wie im Original */
+    overflow: hidden; /* Sicherstellen, dass das Muster nicht übersteht */
+}
+
+/* Haupt-Container für die Login-Box und zusätzliche Info */
+.login-main-container {
+    position: relative;
+    width: 100%;
+    max-width: 448px; /* max-w-md entspricht ca. 448px in Tailwind */
+    z-index: 10; /* Stellen Sie sicher, dass der Inhalt über dem Muster liegt */
+
+}
+
+/* Back Button */
+.back-button {
+    position: absolute;
+    top: -64px; /* -top-16 entspricht ca. 64px */
+    left: 0;
+    display: flex;
+    align-items: center;
+    color:  #05004E;
+    text-decoration: none;
+    background: nond;
+    border: #05004e80 2px solid; 
+    border-radius: 12px;
+    padding: 0.3rem 0.8rem; 
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.back-button:hover {
+    color: #2E7EB3;  
+}
+
+.back-button-icon {
+    margin-right: 8px; /* mr-2 */
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover .back-button-icon {
+    transform: translateX(-6px); /* group-hover:-translate-x-1 */
+}
+
+
+/* Hauptkarte (Login/Forgot Password Box) */
+.login-card {
+    background-color:#F8E8C3;  
+    backdrop-filter: blur(5px); 
+    border-radius: 24px; 
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* border border-white/20 */
+    overflow: hidden;
+}
+
+/* Header mit Gradient */
+.login-card-header {
+    background: linear-gradient(to right,  #2E7EB3,   #4FE3C1); /* from-blue-600 to-purple-600 */
+    padding: 32px; /* p-8 */
+    text-align: center;
+    color: #05004E; 
+}
+
+.header-icon-wrapper {
+    width: 80px; /* w-20 */
+    height: 80px; /* h-20 */
+    background-color: #F8E8C3;  
+    border-radius: 50%; /* rounded-full */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px auto; /* mx-auto mb-4 */
+}
+
+.header-icon {
+    color:#05004E; /* text-white */
+}
+
+.header-title {
+    font-size: 30px; /* text-3xl */
+    font-weight: 700; /* font-bold */
+    margin-bottom: 8px; /* mb-2 */
+}
+
+.header-subtitle {
+    color:#05004E; /* text-blue-100 */
+    font-size: 1em;
+}
+
+/* Formularinhalt */
+.login-card-content {
+    padding: 32px; /* p-8 */
+}
+
+.form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px; /* space-y-6 */
+}
+
+/* Input-Gruppen */
+.input-group {
+    position: relative;
+}
+
+.input-group .input-icon {
+    position: absolute;
+    top: 50%;
+    left: 16px; /* pl-4 */
+    transform: translateY(-50%);
+    height: 1.2rem; 
+    width: 1.2rem; 
+    color:  #4FE3C1 ; 
+    transition: color 0.3s ease;
+    pointer-events: none; /* Icon sollte nicht klickbar sein */
+}
+
+/* Fokus-Effekt für Icon */
+.input-group input:focus + .input-icon,
+.input-group.focused .input-icon { /* Ergänzung für JavaScript-gesteuerte Fokus-Klasse, falls benötigt */
+    color: #4FE3C1; /* group-focus-within:text-blue-500 */
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 16px 16px 48px; /* pl-12 pr-4 py-4 */
+    border: 1px solid #05004e80;  
+    border-radius: 12px; /* rounded-xl */
+    font-size: 1em;
+    color: #1f2937; /* text-gray-800 */
+    background-color: #faedcf;  
+    transition: all 0.2s ease; /* transition-all duration-200 */
+    box-sizing: border-box; /* Wichtig für konsistente Breiten */
+}
+
+.input-group input::placeholder {
+    color: #9ca3af; 
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: transparent; /* focus:border-transparent */
+    box-shadow: 0 0 0 2px #3b82f6; /* focus:ring-2 focus:ring-blue-500 */
+    background-color: #ffffff; /* focus:bg-white */
+}
+
+/* Passwort-Sichtbarkeits-Toggle */
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 16px; /* pr-4 */
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #9ca3af; /* text-gray-400 */
+    padding: 4px; /* Für bessere Klickfläche */
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.password-toggle:hover {
+    color: #4b5563; /* hover:text-gray-600 */
+}
+
+/* Remember Me Checkbox und Forgot Password Link */
+.form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.remember-me-checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 0.875em; /* text-sm */
+    color: #4b5563; /* text-gray-600 */
+}
+
+.remember-me-checkbox input[type="checkbox"] {
+    margin-right: 8px; /* ml-2 */
+    border-radius: 0.25rem; /* rounded */
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    color: #2563eb; /* text-blue-600 */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+    /* Für custom Checkbox-Styling: */
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+}
+
+.remember-me-checkbox input[type="checkbox"]:checked {
+    background-color: #2563eb; /* text-blue-600 */
+    border-color: #2563eb;
+}
+
+.remember-me-checkbox input[type="checkbox"]:checked::after {
+    content: '✔';
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+}
+
+.remember-me-checkbox input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5); /* focus:ring focus:ring-blue-200 focus:ring-opacity-50 */
+    border-color: #60a5fa; /* focus:border-blue-300 */
+}
+
+
+.forgot-password-link {
+    font-size: 0.875em; /* text-sm */
+    color: #2563eb; /* text-blue-600 */
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.forgot-password-link:hover {
+    color: #1e40af; /* hover:text-blue-800 */
+}
+
+/* Buttons */
+.submit-button {
+    width: 100%;
+    padding: 16px 24px; /* py-4 px-6 */
+    border-radius: 12px; /* rounded-xl */
+    font-weight: 600; /* font-semibold */
+    transition: all 0.2s ease; /* transition-all duration-200 */
+    cursor: pointer;
+    border: none; /* Reset default button border */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.primary-button {
+    background: linear-gradient(to right, #2563eb, #9333ea); /* bg-gradient-to-r from-blue-600 to-purple-600 */
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* shadow-lg */
+}
+
+.primary-button:hover {
+    background: linear-gradient(to right, #1e40af, #7e22ce); /* hover:from-blue-700 hover:to-purple-700 */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); /* hover:shadow-xl */
+    transform: translateY(-2px); /* transform hover:-translate-y-0.5 */
+}
+
+.primary-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #3b82f6, 0 0 0 4px #bfdbfe; /* focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 */
+}
+
+.primary-button:disabled {
+    opacity: 0.5; /* disabled:opacity-50 */
+    cursor: not-allowed; /* disabled:cursor-not-allowed */
+    transform: none;
+    box-shadow: none;
+}
+
+.secondary-button {
+    background-color: #f3f4f6; /* bg-gray-100 */
+    color: #374151; /* text-gray-700 */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-md */
+}
+
+.secondary-button:hover {
+    background-color: #e5e7eb; /* hover:bg-gray-200 */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* hover:shadow-lg */
+}
+
+/* Spinner für Ladezustand */
+.spinner-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #ffffff;
+    border-radius: 50%;
+    width: 20px; /* h-6 w-6 */
+    height: 20px;
+    animation: spin 1s linear infinite;
+    margin-right: 12px; /* mr-3 */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Info Box (für Passwort zurücksetzen) */
+.info-box {
+    background-color: #eff6ff; /* bg-blue-50 */
+    border: 1px solid #bfdbfe; /* border border-blue-200 */
+    border-radius: 12px; /* rounded-xl */
+    padding: 16px; /* p-4 */
+    text-align: left;
+}
+
+.info-box p {
+    font-size: 0.875em; /* text-sm */
+    color: #1e40af; /* text-blue-800 */
+    margin: 0;
+}
+
+/* Button Gruppe (Forgot Password Buttons) */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* space-y-3 */
+}
+
+/* Footer-Bereich der Karte */
+.card-footer {
+    margin-top: 32px; /* mt-8 */
+    text-align: center;
+}
+
+/* Trennlinie "oder" */
+.separator {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Zentriert den Text */
+    margin-bottom: 16px; /* mb-4 */
+    color: #6b7280; /* text-gray-500 */
+    font-size: 0.875em; /* text-sm */
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex-grow: 1; /* Nimmt den restlichen Platz ein */
+    border-top: 1px solid #e5e7eb; /* border-t border-gray-200 */
+}
+
+.separator::before {
+    margin-right: 16px; /* px-4 ist hier nicht direkt übersetzbar, daher margin */
+}
+
+.separator::after {
+    margin-left: 16px; /* px-4 */
+}
+
+/* Registrieren-Prompt */
+.register-prompt {
+    font-size: 0.875em; /* text-sm */
+    color: #4b5563; /* text-gray-600 */
+}
+
+.register-link {
+    color: #2563eb; /* text-blue-600 */
+    text-decoration: underline;
+    font-weight: 600; /* font-semibold */
+    margin-left: 4px; /* ml-1 */
+    transition: color 0.2s ease;
+}
+
+.register-link:hover {
+    color: #1e40af; /* hover:text-blue-800 */
+}
+
+/* Zusätzliche Informationen unter der Karte */
+.additional-info {
+    margin-top: 32px; /* mt-8 */
+    text-align: center;
+    font-size: 0.875em; /* text-sm */
+    color: #6b7280; /* text-gray-500 */
+}
+
+/* Responsive Anpassungen (Mobile-First-Ansatz) */
+@media (max-width: 768px) {
+    .login-page-wrapper {
+        padding: 10px;
+    }
+
+    .login-main-container {
+        max-width: 100%; /* Auf kleineren Bildschirmen volle Breite */
+    }
+
+    .login-card {
+        border-radius: 0; /* Keine Ecken auf Mobilgeräten */
+        box-shadow: none; /* Schatten entfernen */
+        border: none; /* Rand entfernen */
+        min-height: 100vh; /* Volle Höhe */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .login-card-header {
+        margin: -32px -32px 32px -32px; /* Negativer Rand anpassen, um über die Kanten zu gehen */
+        border-radius: 0;
+        padding: 24px 15px; /* Etwas weniger Padding */
+    }
+
+    .header-title {
+        font-size: 2em; /* Etwas kleiner */
+    }
+
+    .login-card-content {
+        padding: 20px;
+    }
+
+    .back-button {
+        top: 15px; /* Position am oberen Rand des Bildschirms */
+        left: 15px;
+        color: #fff; /* Damit es über dem Header-Gradienten sichtbar ist */
+        z-index: 20; /* Sicherstellen, dass es über allem liegt */
+    }
+
+    .input-group input {
+        padding: 14px 14px 14px 44px; /* Icons und Text etwas näher zusammen */
+    }
+
+    .input-group .input-icon {
+        left: 14px;
+    }
+
+    .password-toggle {
+        right: 14px;
+    }
+
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px; /* Vertikaler Abstand zwischen Checkbox und Link */
+    }
+
+    .submit-button {
+        padding: 14px 20px;
+        font-size: 1em;
+    }
+}

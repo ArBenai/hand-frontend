@@ -1,30 +1,28 @@
-// client/src/components/Navbar.jsx
-
 import React from 'react';
+import { Link } from 'react-router-dom'; // Importiere Link
 import './Navbar.css';
 
 function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        {/* Logo oder App-Name (ganz links) */}
-        <a href="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo"> 
           NachbarschaftsApp
-        </a>
+        </Link>
 
         {/* Gruppe für die rechten Elemente: Register/Login und Burger-Menü */}
         <div className="nav-right-group">
           {/* Direkte Links: Register und Login (links in dieser Gruppe) */}
           <ul className="direct-nav-menu">
             <li className="nav-item">
-              <a href="/register" className="nav-links nav-links-primary">
+              <Link to="/register" className="nav-links nav-links-primary"> 
                 Neu registrieren
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href="/login" className="nav-links nav-links-primary">
+              <Link to="/login" className="nav-links nav-links-primary"> 
                 Login
-              </a>
+              </Link>
             </li>
           </ul>
 
@@ -37,34 +35,34 @@ function Navbar() {
             {/* Die versteckten Navigationslinks */}
             <ul className="burger-nav-menu">
               <li className="nav-item">
-                <a href="/home" className="nav-links">
+                <Link to="/home" className="nav-links"> 
                   Biete
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/events" className="nav-links">
+                <Link to="/events" className="nav-links"> 
                   Suche
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/blog" className="nav-links">
+                <Link to="/blog" className="nav-links"> 
                   Verschenke
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/help" className="nav-links">
+                <Link to="/help" className="nav-links"> 
                   Hilfe
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/profile" className="nav-links">
+                <Link to="/profile" className="nav-links"> 
                   Events
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a href="/help" className="nav-links">
+                <Link to="/help" className="nav-links"> 
                   Blogs
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
