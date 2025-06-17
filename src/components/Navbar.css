@@ -1,7 +1,7 @@
 /* client/src/components/Navbar.css */
 
 .navbar {
-  background-color: #3498DB;
+  background: linear-gradient(to right,  #05004E,   #4FE3C1); 
   padding: 15px 30px;
   color: white;
   display: flex;
@@ -20,7 +20,7 @@
 }
 
 .navbar-logo {
-  color: #05004E;
+  color: #DE887B; 
   text-decoration: none;
   font-size: 1.8rem;
   font-weight: bold;
@@ -51,19 +51,21 @@
 }
 
 .nav-links-primary {
-  background-color: #2ECC71;
-  color: white;
+  background-color:  #05004E;   
+  color: #DE887B; 
+  font-weight: 900;
   padding: 8px 15px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
 
 .nav-links-primary:hover {
-  background-color: #003a61;
-  color: white;
+  background-color:  #DE887B;  
+  color: #05004E;
 }
 .navbar-logo:hover {
-  color: #F8E8C3;  
+  color: white;
+    text-decoration: underline;  
 }
 
 
@@ -82,10 +84,11 @@
   padding: 5px 10px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  color:  #05004E;
 }
 
 .burger-icon:hover {
-  background-color: #003a617e;
+  background-color: #feffff56;
 }
 
 .burger-nav-menu {
@@ -93,7 +96,7 @@
   position: absolute;
   top: 100%;
   right: 0; /* Bleibt rechtsbündig zum Burger-Icon */
-  background-color: #333;
+  background-color: #feffff56;
   list-style: none;
   margin: 0;
   padding: 10px 0;
@@ -118,11 +121,11 @@
   padding: 12px 20px;
   display: block;
   text-align: left;
-  color: white;
+  color:  #05004E;
   transition: background-color 0.3s ease;
 }
 
 .burger-nav-menu .nav-links:hover {
-  background-color: #575757;
+  background-color: #de887b6c;
   border-radius: 0;
 }
