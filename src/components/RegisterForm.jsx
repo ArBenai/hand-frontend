@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import './RegisterForm.css';
+import { useNavigate } from 'react-router-dom';
+import './RegisterForm.css'; 
 
 
 const RegisterForm = ({ onSuccess }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -55,7 +57,7 @@ const RegisterForm = ({ onSuccess }) => {
             street: formData.street,
             city: formData.city,
             state: formData.state,
-            zip: parseInt(formData.zip),
+            zip: parseInt(formData.zip, 10),
           },
         }),
       });
@@ -63,6 +65,7 @@ const RegisterForm = ({ onSuccess }) => {
       if (response.ok) {
         localStorage.setItem('token', data.token);
         onSuccess(data);
+        navigate('/login'); // Automatisch zur Login-Seite navigieren
       } else {
         setMessage(`:x: Fehler: ${data.message || 'Unbekannter Fehler'}`);
       }
@@ -74,25 +77,43 @@ const RegisterForm = ({ onSuccess }) => {
     }
   };
   return (
-    <form onSubmit={handleSubmit} className="register-form">
-      {['name', 'email', 'password', 'firstName', 'lastName', 'street', 'city', 'state', 'zip'].map((field) => (
-        <label key={field}>
-          {field.charAt(0).toUpperCase() + field.slice(1)}:
-          <input
-            type={field === 'email' ? 'email' : field === 'zip' ? 'number' : 'text'}
-            name={field}
-            value={formData[field]}
-            onChange={handleChange}
-            required
-          />
-          {formErrors[field] && <p className="warning">{formErrors[field]}</p>}
-        </label>
-      ))}
-      <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Wird gesendet...' : 'Registrieren'}
-      </button>
-      {message && <p className="warning">{message}</p>}
-    </form>
+    <>
+      <h1>Registrierungsformular</h1>
+      <form onSubmit={handleSubmit} className="register-form">
+        {[
+          'name',
+          'email',
+          'password',
+          'firstName',
+          'lastName',
+          'street',
+          'city',
+          'state',
+          'zip',
+        ].map((field) => (
+          <label key={field} className="register-label">
+            {field.charAt(0).toUpperCase() + field.slice(1)}:
+            <input
+              type={field === 'email' ? 'email' : field === 'zip' ? 'number' : 'text'}
+              name={field}
+              value={formData[field]}
+              onChange={handleChange}
+              required
+              className="register-input"
+            />
+            {formErrors[field] && <p className="register-warning">{formErrors[field]}</p>}
+          </label>
+        ))}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className={`register-button ${isSubmitting ? 'disabled' : ''}`}
+        >
+          {isSubmitting ? 'Wird gesendet…' : 'Registrieren'}
+        </button>
+        {message && <p className="register-warning">{message}</p>}
+      </form>
+    </>
   );
 };
 export default RegisterForm;

@@ -7,12 +7,12 @@
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   font-family: "Nunito", sans-serif;
-  color: var(--text-color); /* aus app.css */
+  color: #1E3A8A; /* deepBlue */
 }
 .register-form label {
   display: block;
   margin-bottom: 1em;
-  color: var(--text-color); /* statt #333 */
+  color: #1E3A8A;
 }
 .register-form input {
   width: 100%;
@@ -23,18 +23,9 @@
   margin-top: 0.3em;
   box-sizing: border-box;
 }
-.register-form fieldset {
-  border: none;
-  padding: 0;
-}
-.register-form legend {
-  font-weight: bold;
-  margin-bottom: 0.5em;
-  color: var(--text-color);
-}
-.register-form button {
+.register-button {
   padding: 0.8em 1.5em;
-  background-color: var(--bg-secondary); /* skyBlue */
+  background-color: #38BDF8; /* skyBlue */
   color: white;
   font-size: 1em;
   border: none;
@@ -42,16 +33,15 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.register-form button:hover:not([disabled]) {
-  background-color: var(--bg-tertiary); /* mint */
+.register-button:hover:not(.disabled) {
+  background-color: #3EE0B4; /* mint */
 }
-.register-form button[disabled] {
-  background-color: #CCCCCC;
+.register-button.disabled {
+  background-color: #CCCCCC !important;
   cursor: not-allowed;
 }
-.register-form p {
-  color: var(--warning-color); /* coral */
+.register-warning {
+  color: #F97316; /* coral */
   margin-top: 1em;
   font-weight: bold;
 }
-
