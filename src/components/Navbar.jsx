@@ -31,17 +31,17 @@ function Navbar() {
             <ul className="burger-nav-menu">
               <li className="nav-item">
                 <Link to="/home" className="nav-links"> 
-                  Biete
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/service" className="nav-links"> 
+                  Service
                 </Link>
               </li>
               <li className="nav-item">
                 <Link to="/events" className="nav-links"> 
-                  Suche
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/blog" className="nav-links"> 
-                  Verschenke
+                  Events
                 </Link>
               </li>
               <li className="nav-item">
@@ -50,13 +50,13 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/profile" className="nav-links"> 
-                  Events
+                <Link to="/blog" className="nav-links"> 
+                  Blog
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/help" className="nav-links"> 
-                  Blogs
+                <Link to="/profile" className="nav-links"> 
+                  Profile
                 </Link>
               </li>
             </ul>
