@@ -1,4 +1,4 @@
-import ImageCarousel from './ImageCarousel';
+import ImageCarousel from '../components/ImageCarousel';
 import './LandingPage.css';
 import React from 'react';
 

@@ -1,23 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Importiere Link
 import './Navbar.css';
+import logo from '../assets/logo.png'; // Importiere das Logo, falls du es in der Navbar verwenden möchtest
 
 function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo"> 
-          NachbarschaftsApp
-        </Link>
-
-        {/* Gruppe für die rechten Elemente: Register/Login und Burger-Menü */}
+        {/* Logo oder App-Name (ganz links) */}
+        <a href="/" className="nav-logo">
+          <img className="logo" src={logo} alt="Hand in Hand"/>
+          <span className="logo-text">Hand in Hand</span>
+        </a>
         <div className="nav-right-group">
           {/* Direkte Links: Register und Login (links in dieser Gruppe) */}
           <ul className="direct-nav-menu">
             <li className="nav-item">
-              <Link to="/login" className="nav-links nav-links-primary"> 
+              <a href="/register" className="nav-links nav-links-primary">
+                Register
+              </a>
+            </li>
+            <li className="nav-item">
+              <a href="/login" className="nav-links nav-links-primary">
                 Login
-              </Link>
+              </a>
             </li>
           </ul>
 
@@ -30,34 +35,29 @@ function Navbar() {
             {/* Die versteckten Navigationslinks */}
             <ul className="burger-nav-menu">
               <li className="nav-item">
-                <Link to="/home" className="nav-links"> 
+                <a href="/home" className="nav-links">
                   Home
-                </Link>
+                </a>
               </li>
               <li className="nav-item">
-                <Link to="/service" className="nav-links"> 
-                  Service
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/events" className="nav-links"> 
+                <a href="/events" className="nav-links">
                   Events
-                </Link>
+                </a>
               </li>
               <li className="nav-item">
-                <Link to="/help" className="nav-links"> 
-                  Hilfe
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/blog" className="nav-links"> 
+                <a href="/blog" className="nav-links">
                   Blog
-                </Link>
+                </a>
               </li>
               <li className="nav-item">
-                <Link to="/profile" className="nav-links"> 
-                  Profile
-                </Link>
+                <a href="/help" className="nav-links">
+                  Hilfe
+                </a>
+              </li>
+              <li className="nav-item">
+                <a href="/profile" className="nav-links">
+                  Profil
+                </a>
               </li>
             </ul>
           </div>

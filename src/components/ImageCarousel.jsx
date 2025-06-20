@@ -22,7 +22,7 @@ function ImageCarousel() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
-    }, 3000); // هر ۳ ثانیه
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);
