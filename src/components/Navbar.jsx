@@ -15,11 +15,6 @@ function Navbar() {
           {/* Direkte Links: Register und Login (links in dieser Gruppe) */}
           <ul className="direct-nav-menu">
             <li className="nav-item">
-              <a href="/register" className="nav-links nav-links-primary">
-                Register
-              </a>
-            </li>
-            <li className="nav-item">
               <a href="/login" className="nav-links nav-links-primary">
                 Login
               </a>
