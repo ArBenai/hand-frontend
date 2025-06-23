@@ -34,6 +34,11 @@ function Navbar() {
                   Home
                 </a>
               </li>
+              <li className='nav-item'>
+                <a href="/exchange" className="nav-links">
+                  Verschenken & Tauschen
+                </a>
+              </li>
               <li className="nav-item">
                 <a href="/events" className="nav-links">
                   Events
