@@ -43,15 +43,17 @@
 }
 
 .navbar-logo {
+  display: flex;
+  align-items: center;
   color: white;
   text-decoration: none;
   font-size: 1.8rem;
   font-weight: bold;
   letter-spacing: 0.5px;
   height : 20px; /* Höhe des Logos */
-
   transition: color 0.4s ease;
 }
+
 .logo {
  margin-right: 10px;
  vertical-align: middle;
@@ -61,17 +63,20 @@
   transition: transform 0.4s ease;
 }
 .logo:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); 
 }
 
-.navbar-logo:hover {
-  color: #05004E; /* deepBlue */
-  transform: scale(1.05); /* Leichtes Vergrößern beim Hover */
-}
+navbar-logo:hover {
+  color: #05004E; /* deepBlue 
+  transform: scale(1.05); /* Leichtes Vergrößern beim Hover */}
+   
+
 
 .logo-text {
   display: inline-block;
   vertical-align: middle;
+  margin-left: 10px; /* Abstand zwischen Logo und Text */
+  /* Schriftart und Stil für den Logo-Text */
   font-family: "Nunito", sans-serif;
   font-size: 1.8rem;
   font-weight: bold;  
