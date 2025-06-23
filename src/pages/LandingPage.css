@@ -19,6 +19,13 @@ body {
   color: var(--text-color);
 }
 
+section {
+  padding: 2rem;
+  margin: 0 auto;
+  max-width: 1200px;
+  box-sizing: border-box;
+}
+
 /* Container for the entire landing page */
 .landing-container {
   display: flex;
@@ -37,8 +44,9 @@ body {
 .landing-content {
   text-align: center;
   max-width: 800px;
-  padding: 1rem;
-}
+  padding: 1rem;  
+
+  }
 
 .landing-content h1 {
   font-size: 3rem;
@@ -51,13 +59,24 @@ body {
   font-size: 1.25rem;
   margin-bottom: 2rem;
 }
+.landing-content h1:hover {
+  color: var(--skyBlue);
+}
+.landing-content p:hover {
+  color: var(--skyBlue);
+}
+
+
+
 
 /* Buttons container */
 .cta-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+    gap: 1rem;
   flex-wrap: wrap;
+  margin-bottom: 5rem;
+ 
 }
 
 /* Base button style */
@@ -70,7 +89,6 @@ body {
   text-align: center;
   min-width: 140px;
   border-radius: 50px;
-  border: none;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -80,9 +98,12 @@ body {
 .btn.primary {
   background-color: var(--mint);
   color: var(--deepBlue);
-  border: 2px solid var(--coral);
-    padding-bottom: 20px;
-}
+  border-radius: 50px;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: inline-block;
+        }
 
 .btn.primary:hover {
   background-color: var(--coral);
@@ -93,10 +114,13 @@ body {
 .btn.secondary {
   background-color: var(--skyBlue);
   color: var(--deepBlue);
-  border: 2px solid var(--skyBlue);
+  border-radius: 50px;
+  text-align: center;
+  padding-top: 20px;
   padding-bottom: 20px;
-  
-}
+  display: inline-block;
+
+  }
 
 .btn.secondary:hover {
   background-color: white;
@@ -118,11 +142,13 @@ body {
     flex-direction: column;
     gap: 0.75rem;
     align-items: center;
+    width: 100%;
   }
 
   .btn {
     width: 100%;
     max-width: 300px;
+    align-content: center;
   }
         .btn.primary, .btn.secondary {
             min-width: 100%;

@@ -69,6 +69,7 @@ function LandingPage() {
         <button className="btn primary">Hilfeseite öffnen</button>
       </section>
       
+     {/* Footer */}
       <footer className="app-footer">
         <div className="footer-content">
           <div className="footer-links">
