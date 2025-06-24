@@ -22,6 +22,7 @@ function App() {
           <Route path="/help" element={<Help/>} />
           <Route path="/events" />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/exchange/*" element={<Exchange />} /> {/* exchange beinhaltet: Verschenke, Tauschen, Suchen */}
 
         </Routes>
       </div>

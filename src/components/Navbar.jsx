@@ -7,7 +7,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
         {/* Logo oder App-Name (ganz links) */}
-        <a href="/" className="nav-logo">
+        <a href="/" className="navbar-logo">
           <img className="logo" src={logo} alt="Hand in Hand"/>
           <span className="logo-text">Hand in Hand</span>
         </a>
@@ -32,6 +32,11 @@ function Navbar() {
               <li className="nav-item">
                 <a href="/home" className="nav-links">
                   Home
+                </a>
+              </li>
+              <li className='nav-item'>
+                <a href="/exchange" className="nav-links">
+                  Verschenken & Tauschen
                 </a>
               </li>
               <li className="nav-item">
