@@ -156,7 +156,6 @@ const Profile = () => {
                 <div className="input-group">
                   <label>Passwort</label>
                   <div className="input-container">
-                    <span className="input-icon">🔒</span>
                     {isEditing ? (
                       <input
                         type="password"
