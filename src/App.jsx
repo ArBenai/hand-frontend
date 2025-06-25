@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Help from './pages/Help'; 
 import Exchange from './pages/Exchange/Exchange'; 
+import ForgotPassword from './components/ForgotPassword';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/events" />
           <Route path="/profile" element={<Profile />} />
           <Route path="/exchange" element={<Exchange />} /> 
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
         </Routes>
       </div>
