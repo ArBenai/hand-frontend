@@ -7,7 +7,9 @@ import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
-
+import Home from './pages/Home'; // Importiere die Home-Seite, falls du sie verwenden möchtest
+import Events from './pages/Events'; // Importiere die Events-Seite, falls du sie verwenden möchtest
+import EventDetail from './pages/EventDetail.jsx'; 
 
 function App() {
   return (
@@ -18,8 +20,11 @@ function App() {
           <Route path="/" element={<LandingPage/>} /> 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/home" />
-          <Route path="/events" />
+          <Route path="/home" element={<Home />} /> 
+          <Route path="/events" element={<Events />} />
+          <Route path="/event/:id" element={<EventDetail />} />
+        
+          
           <Route path="/profile" element={<Profile />} />
 
         </Routes>
