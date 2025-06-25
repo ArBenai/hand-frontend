@@ -1,4 +1,3 @@
-// client/src/App.jsx
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -8,6 +7,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Help from './pages/Help'; 
+import Exchange from './pages/Exchange/Exchange'; 
+import ForgotPassword from './components/ForgotPassword';
 
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
           <Route path="/help" element={<Help/>} />
           <Route path="/events" />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/exchange/*" element={<Exchange />} /> {/* exchange beinhaltet: Verschenke, Tauschen, Suchen */}
+          <Route path="/exchange" element={<Exchange />} /> 
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
         </Routes>
       </div>

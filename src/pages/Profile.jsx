@@ -9,7 +9,7 @@ const Profile = () => {
     password: '••••••••••',
     firstName: 'Max',
     lastName: 'Mustermann',
-    state: 'Bayern',
+    district: 'München Nord',
     city: 'München',
     zip: '80331',
     street: 'Musterstraße 123',
@@ -208,7 +208,7 @@ const Profile = () => {
               <div className="form-group">
                 <h3 className="section-title">Adresse</h3>
                 <div className="input-group">
-                  <label>Straße</label>
+                  <label>Straße & Hausnummer </label>
                   <div className="input-container">
                     {isEditing ? (
                       <input
@@ -251,16 +251,16 @@ const Profile = () => {
                     </div>
                   </div>
                   <div className="input-group">
-                    <label>Bundesland</label>
+                    <label>Ortsteil</label>
                     <div className="input-container">
                       {isEditing ? (
                         <input
                           type="text"
                           value={editData.state}
-                          onChange={(e) => handleInputChange('state', e.target.value)}
+                          onChange={(e) => handleInputChange('district', e.target.value)}
                         />
                       ) : (
-                        <div className="input-display">{profileData.state}</div>
+                        <div className="input-display">{profileData.district}</div>
                       )}
                     </div>
                   </div>
