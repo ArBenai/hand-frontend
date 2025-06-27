@@ -1,4 +1,3 @@
-// client/src/App.jsx
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -7,29 +6,32 @@ import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
-import Home from './pages/Home'; // Importiere die Home-Seite, falls du sie verwenden möchtest
-import Events from './pages/Events'; // Importiere die Events-Seite, falls du sie verwenden möchtest
+import Home from './pages/Home'; 
+import Events from './pages/Events';
 import EventDetail from './pages/EventDetail.jsx'; 
+import Help from './pages/Help'; 
+import Exchange from './pages/Exchange/Exchange'; 
+import ForgotPassword from './components/ForgotPassword';
 
 
 function App() {
-  return (
-    
-      <Router>
-        <Navbar /> {/* Die Navbar wird immer angezeigt, unabhängig von der Route */}
-        <div className="container"> {/* Optional: Ein Container für deinen Seiteninhalt */}
-          <Routes>
-            <Route path="/" element={<LandingPage/>} /> 
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/home" element={<Home />} /> 
-            <Route path="/events" element={<Events />} />
-            <Route path="/event/:id" element={<EventDetail />} />
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
-        </div>
-      </Router>
-   
+  return
+    <Router>
+      <Navbar /> {/* Die Navbar wird immer angezeigt, unabhängig von der Route */}
+      <div className="container"> {/* Optional: Ein Container für deinen Seiteninhalt */}
+        <Routes>
+          <Route path="/" element={<LandingPage/>} /> 
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/help" element={<Help/>} />
+          <Route path="/events" />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/exchange" element={<Exchange />} /> 
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
