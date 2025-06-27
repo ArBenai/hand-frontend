@@ -11,25 +11,25 @@ import Home from './pages/Home'; // Importiere die Home-Seite, falls du sie verw
 import Events from './pages/Events'; // Importiere die Events-Seite, falls du sie verwenden möchtest
 import EventDetail from './pages/EventDetail.jsx'; 
 
+
 function App() {
   return (
-    <Router>
-      <Navbar /> {/* Die Navbar wird immer angezeigt, unabhängig von der Route */}
-      <div className="container"> {/* Optional: Ein Container für deinen Seiteninhalt */}
-        <Routes>
-          <Route path="/" element={<LandingPage/>} /> 
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/home" element={<Home />} /> 
-          <Route path="/events" element={<Events />} />
-          <Route path="/event/:id" element={<EventDetail />} />
-        
-          
-          <Route path="/profile" element={<Profile />} />
-
-        </Routes>
-      </div>
-    </Router>
+    
+      <Router>
+        <Navbar /> {/* Die Navbar wird immer angezeigt, unabhängig von der Route */}
+        <div className="container"> {/* Optional: Ein Container für deinen Seiteninhalt */}
+          <Routes>
+            <Route path="/" element={<LandingPage/>} /> 
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/home" element={<Home />} /> 
+            <Route path="/events" element={<Events />} />
+            <Route path="/event/:id" element={<EventDetail />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </div>
+      </Router>
+   
   );
 }
 

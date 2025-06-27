@@ -1,30 +1,39 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import './EventDetail.css';
 import { ArrowLeft } from 'lucide-react';
+import {AuthContext}  from '../context/AuthContext.jsx';
+import axios from 'axios';
+import logo from '../assets/logo.png'; 
+import './EventDetail.css';
 
 const EventDetail = () => {
   const { state } = useLocation();
   const event = state?.event;
+  const { user } = useContext(AuthContext); // logged-in user from AuthContext
 
-  const [name, setName] = useState('');
   const [text, setText] = useState('');
   const [comments, setComments] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name.trim() === '' || text.trim() === '') return;
+    if (!text.trim()) return;
 
     const newComment = {
       id: Date.now(),
-      name,
+      user: {
+        name: user?.name || 'Unbekannt',
+        avatar: user?.avatar || '/default-avatar.png',
+      },
       text,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
     setComments([newComment, ...comments]);
-    setName('');
     setText('');
+  };
+
+  const handleDelete = (id) => {
+    setComments(comments.filter((c) => c.id !== id));
   };
 
   const goBack = () => {
@@ -33,22 +42,29 @@ const EventDetail = () => {
 
   if (!event) return <p>Event nicht gefunden.</p>;
 
+  // Function to handle like button click
+  const handleLike = (id) => {
+    setComments(prevComments =>
+      prevComments.map(c =>
+        c.id === id ? { ...c, liked: !c.liked } : c
+      )
+    );
+  };
+
   return (
-   
     <div className="event-detail-wrapper">
-      {/* Zurück-Button */}
+
+      {/* Back Button */}
       <button onClick={goBack} className="back-button">
         <ArrowLeft size={20} className="back-button-icon" />
         Zurück
       </button>
 
+      {/* Event Info */}
       <div className="event-detail-container">
-        {/* Image Left */}
         <div className="events-image">
           <img src={event.image} alt={event.title} />
         </div>
-
-        {/* Info Right */}
         <div className="event-info">
           <h1>{event.title}</h1>
           <p><strong>📅 Datum:</strong> {event.date}</p>
@@ -58,68 +74,75 @@ const EventDetail = () => {
         </div>
       </div>
 
-      {/* Kommentar-Bereich */}
-      <form className="comment-form" onSubmit={handleSubmit}>
-  <div className="comment-name-wrapper">
-    <div className="comment-avatar">
-      {name ? name.charAt(0).toUpperCase() : "?"}
-    </div>
-    <input
-      type="text"
-      className="comment-name"
-      placeholder="Dein Name"
-      value={name}
-      onChange={(e) => setName(e.target.value)}
-    />
-  </div>
-  <textarea
-    className="comment-text"
-    placeholder="Dein Kommentar"
-    value={text}
-    onChange={(e) => setText(e.target.value)}
-  />
-  <button type="submit" className="comment-submit">Kommentieren</button>
-</form>
+      {/* Kommentare */}
+ {/* Kommentare */}
+<div className="comment-section">
+  <h2>Kommentare</h2>
 
-      <div className="comment-list">
-        {comments.length === 0 ? (
-          <p className="no-comments">Noch keine Kommentare.</p>
-        ) : (
-          comments.map((c) => (
-            <div key={c.id} className="comment-item">
-              <div className="comment-avatar">
-                {c.name ? c.name.charAt(0).toUpperCase() : "?"}
-              </div>
-              <div className="comment-content">
-                <div className="comment-meta">
-                  <span className="comment-author">{c.name}</span>
-                  <span className="comment-time">{c.time}</span>
-                  <button
-                    className="comment-delete"
-                    onClick={() => setComments(comments.filter(comment => comment.id !== c.id))}
-                    title="Kommentar löschen"
-                  >
-                    🗑️
-                  </button>
-                </div>
-                <p className="comment-text-display">{c.text}</p>
-              </div>
+  <form className="comment-form" onSubmit={handleSubmit}>
+    <div className="comment-input-wrapper">
+      <img
+        src={user?.avatar || logo}
+        alt="avatar"
+        className="comment-avatar-img"
+      />
+      <div className="comment-form-fields">
+        <div className="comment-user-name">{user?.name}</div>
+        <textarea
+          className="comment-textarea"
+          placeholder="Schreibe einen Kommentar..."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+      </div>
+    </div>
+    <button type="submit" className="comment-submit-btn">Kommentieren</button>
+  </form>
+
+  <div className="comment-list">
+    {comments.length === 0 ? (
+      <p className="no-comments">Noch keine Kommentare.</p>
+    ) : (
+      comments.map((c) => (
+        <div key={c.id} className="comment-item">
+          <div className="comment-left">
+            <div className="comment-avatar-circle">
+              {c.user.name ? c.user.name.charAt(0).toUpperCase() : "?"}
             </div>
-          ))
-        )}
-      
+          </div>
+          <div className="comment-right">
+            <div className="comment-header">
+              <span className="comment-author">{c.user.name}</span>
+              <span className="comment-time">{c.time}</span>
+            </div>
+            <p className="comment-text-display">{c.text}</p>
+            <div className="comment-actions">
+              <button onClick={() => handleLike(c.id)} title="Gefällt mir">
+  {c.liked ? '💙' : '👍'}
+</button>
+              <button title="Emoji">😊</button>
+              <button title="Antworten">Antworten</button>
+              {c.user.name === user?.name && (
+
+               {/* <button onClick={() => handleDelete(c.id)} title="Kommentar löschen">🗑</button>*/}
+              )}
+            </div>
+          </div>
         </div>
-        {/* inspiresätze */}
-        <div className="event-bottom-inspire">
-  <p className="inspire-quote">„Gemeinsam gestalten wir unsere Nachbarschaft – sei dabei!“</p>
-  <div className="community-note">
-       <p>Möchtest du über neue Events informiert bleiben? Trage dich in unseren Newsletter ein!</p>
-  <input className='Newsletter' type="email" placeholder="Deine E-Mail" />
-  <button>Anmelden</button>
+      ))
+    )}
   </div>
 </div>
-        </div>
-        
+
+      {/* Footer */}
+      <div className="event-bottom-inspire">
+        <p className="inspire-quote">„Gemeinsam gestalten wir unsere Nachbarschaft – sei dabei!“</p>
+        <a href="/" className="logo-link">
+          <img src={logo} alt="Logo" className="logo-image" />
+        </a>
+        <p className="inspire-text">„all Rechte vorbehalten bei Hand in Hand e.V.“</p>
+      </div>
+    </div>
   );
 };
 

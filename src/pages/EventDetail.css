@@ -126,153 +126,176 @@
 /* COMMENT SECTION */
 
 .comment-section {
-  margin-top: 40px;
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(46, 126, 179, 0.1);
-  width: 100%;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+    margin-top: 60px;
+    padding: 40px 30px;
+    background-color: var(--mint);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(46, 126, 179, 0.1);
+    width: 100%;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "Nunito", sans-serif;
 }
 
 .comment-section h2 {
-  font-size: 1.6rem;
-  color: var(--deepBlue);
-  margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: var(--deepBlue);
+    margin-bottom: 24px;
+    text-align: center;
+    font-weight: bold;
 }
 
 /* Form styles */
 .comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 28px 24px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px rgba(46, 126, 179, 0.10);
+   
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 32px auto;
+}
+
+.comment-input-wrapper {
+    display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: 20px;
+  padding: 12px;
+ background-color: var(--cream);
+  border: 1px solid #ccc;
+}
+
+.comment-avatar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.comment-form-fields {
+  flex: 1;
+
+}
+
+.comment-user-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+    color: var(--text-color);
+    font-family: "Nunito", sans-serif;
+}
+
+.comment-textarea {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  border-radius: 8px;
+
+  font-family: "Nunito", sans-serif;
+  font-size: 1rem;
+  resize: none;
+    background-color: var(--cream);
+}
+.comment-textarea:focus {
+  outline: none;
+  border-color: var(--skyBlue);
+  }
+
+.comment-submit-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    max-width: 300px;
+    justify-content: center;
+    align-self: center;
+    background-color: var(--coral);
+    color: var(--deepBlue);
+    border: none;
+    border-radius: 50px;
+    font-family: "Nunito", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(46, 126, 179, 0.10);
+}
+.comment-submit-btn:hover {
+    background-color: var(--mint);
+    color: var(--deepBlue);
+}
+
+.comment-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.comment-name-wrapper {
+.comment-item {
   display: flex;
-  align-items: center;
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 12px;
   gap: 12px;
+ border-color: skyBlue;    
+  border-width: 2px;
+  border-style: solid;
 }
 
-.comment-avatar {
+.comment-left .comment-avatar-circle {
+  background-color: #007bff;
+  color: white;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  background-color: var(--skyBlue);
-  color: white;
   font-weight: bold;
-  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Nunito", sans-serif;
+  border-radius: 50%;
+  font-size: 18px;
 }
 
-.comment-name,
-.comment-text {
-  width: 100%;
-  padding: 12px;
-  border: 1.5px solid var(--skyBlue);
-  border-radius: 8px;
-  font-size: 1rem;
-  font-family: "Nunito", sans-serif;
-  box-sizing: border-box;
-}
-
-.comment-name:focus,
-.comment-text:focus {
-  border-color: var(--deepBlue);
-  outline: none;
-}
-
-.comment-text {
-  min-height: 100px;
-  resize: vertical;
-}
-
-.comment-button {
-  align-self: flex-start;
-  padding: 10px 24px;
-  background-color: var(--skyBlue);
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.comment-button:hover {
-  background-color: var(--deepBlue);
-}
-
-/* Comment list */
-.comment-list {
-  margin-top: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.comment-item {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 12px;
-}
-
-.comment-content {
+.comment-right {
   flex: 1;
 }
 
-.comment-meta {
+.comment-header {
   display: flex;
   justify-content: space-between;
+  font-size: 0.9em;
   margin-bottom: 6px;
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.comment-author {
   font-weight: bold;
-  color: var(--deepBlue);
-}
-
-.comment-time {
-  color: #888;
-  font-size: 0.85rem;
 }
 
 .comment-text-display {
-  font-size: 1rem;
-  line-height: 1.4;
-  color: var(--text-color);
+  margin-bottom: 8px;
 }
 
-.comment-submit {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-    padding: 10px;
-    border-radius: 25px;
-    font-family: "Nunito", sans-serif;
-    font-weight: bold;
-    background-color: var(--skyBlue);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
+.comment-actions button {
+  margin-right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+/* Comment Section Styles */
+
+/* Responsive: Stack avatar and inputs vertically on small screens */
+@media (max-width: 600px) {
+    .comment-name-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    .comment-submit {
+        width: 100%;
+        align-self: stretch;
+    }
 }
 
-.comment-submit:hover {
-  background-color: var(--deepBlue);
-  transition: background-color 0.3s ease;
-  color: #fff;
-}
+
 
 /* comment delete button */
 
@@ -292,26 +315,31 @@
   color: #e74c3c;
 }
 
-/* No comments message */
+/* Displayed Comment Text */
+
+.comment-text-display {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+/* No Comments */
+
 .no-comments {
   color: #777;
   font-style: italic;
-  margin-top: 10px;
+  text-align: center;
 }
 
 /* Responsive */
-@media (max-width: 600px) {
-  .comment-form,
-  .comment-list {
-    padding: 0;
-  }
 
+@media (max-width: 600px) {
   .comment-name-wrapper {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .comment-button {
+  .comment-submit {
     width: 100%;
     text-align: center;
   }
@@ -368,56 +396,38 @@
   text-align: center;
   line-height: 1.6;
 }
-.community-note button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: var(--skyBlue);
-  color: #fff;
-  border: none;
-  border-radius: 25px;
+.community-note a {
+  color: var(--skyBlue);
+  text-decoration: none;
+  font-weight: bold;
+}
+.community-note a:hover {
+  text-decoration: underline;
+}
+
+/* Logo styles */
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+.logo-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  
+}
+.logo-image:hover {
+    transform: scale(1.12) rotate(-4deg);
+    box-shadow: 0 6px 18px rgba(46, 126, 179, 0.18);
+    transition: transform 0.25s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.inspire-text {
   font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.community-note button:hover {
-  background-color: var(--deepBlue);
-}
-
-.Newsletter {
-    font-family: "Nunito", sans-serif;
-    font-size: 1.05rem;
-    font-weight: 400;
-    padding: 7px 15px;
-    border: 2px solid var(--skyBlue);
-    border-radius: 30px;
-    width: 100%;
-    max-width: 360px;
-    background-color: #f9fafb;
-    color: var(--text-color);
-    box-sizing: border-box;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    margin: 0 auto 10px auto;
-    box-shadow: 0 2px 8px rgba(46, 126, 179, 0.07);
-}
-
-.Newsletter:focus {
-    border-color: var(--deepBlue);
-    box-shadow: 0 0 0 3px rgba(46, 126, 179, 0.15);
-    outline: none;
-}
-
-.Newsletter:focus {
-  outline: none;
-  border-color: var(--deepBlue);
-}
-
-.Newsletter::placeholder {
-    color: #aaa;
-    font-style: italic;
-    font-family: "Nunito", sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-    border: none;
-    outline: none;
+  color: var(--deepBlue);
+  margin-top: 20px;
+  font-family: "Nunito", sans-serif;
 }
