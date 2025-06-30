@@ -1,17 +1,20 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home'; 
 import Navbar from './components/Navbar';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
-import Home from './pages/Home';
 import Events from './pages/Events';
 import EventDetail from './pages/EventDetail.jsx';
 import EventRegister from './pages/EventRegister.jsx';
 import Help from './pages/Help';
 import Exchange from './pages/Exchange/Exchange';
 import ForgotPassword from './components/ForgotPassword';
+import Blog from './pages/Blog'; 
+
 function App() {
   return (
     <Router>
@@ -30,6 +33,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/exchange/*" element={<Exchange />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/blog" element={<Blog />} /> 
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>
