@@ -81,14 +81,31 @@
 }
 
 .register-button {
-    background-color: var(--coral);
-    color: var(--deepBlue);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
+  background-color: var(--mint);
+  color: #fff;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 18px;
+  
+  font-weight: bold;
+  box-shadow: 0 2px 10px rgba(222, 136, 123, 0.15);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+  
+  font-family: "Nunito", sans-serif;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  outline: none;
+}
+.register-button:hover,
+.register-button:focus {
+  background-color: var(--mint);
+  color: var(--deepBlue);
+  box-shadow: 0 4px 18px rgba(79, 227, 193, 0.18);
+  transform: translateY(-2px) scale(1.04);
 }
 
 .event-description p {

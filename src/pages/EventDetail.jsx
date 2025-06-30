@@ -1,60 +1,76 @@
-import { useState, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState, useContext,useEffect } from 'react';
+import { useLocation,useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import {AuthContext}  from '../context/AuthContext.jsx';
 import axios from 'axios';
 import logo from '../assets/logo.png'; 
 import './EventDetail.css';
 
+import { useNavigate } from 'react-router-dom';
+
 const EventDetail = () => {
+  const navigate = useNavigate();
   const { state } = useLocation();
-  const event = state?.event;
-  const { user } = useContext(AuthContext); // logged-in user from AuthContext
+  const { id } = useParams(); // Get event ID from URL parameters
+  const eventFromState = state?.event || null; // Get event data from state or null if not available
+  const { user, loading } = useContext(AuthContext); // logged-in user from AuthContext
 
   const [text, setText] = useState('');
   const [comments, setComments] = useState([]);
+  const [event, setEvent] = useState(eventFromState); // State to hold event data
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!text.trim()) return;
+  useEffect(() => {
+    if (!event) {
+      // Fetch the event by ID if not passed via state
+      axios.get(`/events/${id}`)
+        .then((res) => {
+          setEvent(res.data.data); // Adjust to your API response
+        })
+        .catch((err) => {
+          console.error('Fehler beim Laden des Events:', err);
+        });
+    }
+}, [event, id]);
 
-    const newComment = {
-      id: Date.now(),
-      user: {
-        name: user?.name || 'Unbekannt',
-        avatar: user?.avatar || '/default-avatar.png',
-      },
-      text,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-    };
+// Handlers
+const handleSubmit = (e) => {
+  e.preventDefault();
+  if (!text.trim()) return;
 
-    setComments([newComment, ...comments]);
-    setText('');
+  const newComment = {
+    id: Date.now(),
+    user: {
+      name: user?.name || 'Unbekannt',
+      avatar: user?.avatar || logo,
+    },
+    text,
+    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
   };
 
-  const handleDelete = (id) => {
-    setComments(comments.filter((c) => c.id !== id));
-  };
+  setComments([newComment, ...comments]);
+  setText('');
+};
 
-  const goBack = () => {
-    window.history.back();
-  };
+function handleLike(id) {
+  console.log("Liked comment with ID:", id);
+  // You can implement like logic here later
+}
 
-  if (!event) return <p>Event nicht gefunden.</p>;
+const handleDelete = (id) => {
+  setComments(comments.filter((c) => c.id !== id));
+};
 
-  // Function to handle like button click
-  const handleLike = (id) => {
-    setComments(prevComments =>
-      prevComments.map(c =>
-        c.id === id ? { ...c, liked: !c.liked } : c
-      )
-    );
-  };
+const goBack = () => {
+  window.history.back();
+};
 
-  return (
-    <div className="event-detail-wrapper">
+if (!event) return <p>Event nicht gefunden.</p>;
+if (loading) return <p>Benutzerdaten werden geladen...</p>;
 
-      {/* Back Button */}
+return (
+  <div className="event-detail-wrapper">
+
+      {/* Zurück Button */}
       <button onClick={goBack} className="back-button">
         <ArrowLeft size={20} className="back-button-icon" />
         Zurück
@@ -70,69 +86,88 @@ const EventDetail = () => {
           <p><strong>📅 Datum:</strong> {event.date}</p>
           <p><strong>📍 Ort:</strong> {event.location}</p>
           <p className="event-description">{event.description}</p>
-          <button className="register-button">Ich will teilnehmen!</button>
+          <button
+  className="register-button"
+  onClick={() => navigate(`/events/${event.id}/register`, { state: { event } })}
+>
+  Ich will teilnehmen!
+</button>
         </div>
       </div>
 
       {/* Kommentare */}
- {/* Kommentare */}
-<div className="comment-section">
-  <h2>Kommentare</h2>
+      <div className="comment-section">
+        <h2>Kommentare</h2>
 
-  <form className="comment-form" onSubmit={handleSubmit}>
-    <div className="comment-input-wrapper">
-      <img
-        src={user?.avatar || logo}
-        alt="avatar"
-        className="comment-avatar-img"
-      />
-      <div className="comment-form-fields">
-        <div className="comment-user-name">{user?.name}</div>
-        <textarea
-          className="comment-textarea"
-          placeholder="Schreibe einen Kommentar..."
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-      </div>
-    </div>
-    <button type="submit" className="comment-submit-btn">Kommentieren</button>
-  </form>
-
-  <div className="comment-list">
-    {comments.length === 0 ? (
-      <p className="no-comments">Noch keine Kommentare.</p>
-    ) : (
-      comments.map((c) => (
-        <div key={c.id} className="comment-item">
-          <div className="comment-left">
-            <div className="comment-avatar-circle">
-              {c.user.name ? c.user.name.charAt(0).toUpperCase() : "?"}
+        <form className="comment-form" onSubmit={handleSubmit}>
+          <div className="comment-input-wrapper">
+            {/* Show first letter of user's name or logo if not available */}
+            {user?.name ? (
+              <div className="comment-avatar-circle">
+                {user.name.charAt(0).toUpperCase()}
+              </div>
+            ) : (
+              <img
+                src={logo}
+                alt="avatar"
+                className="comment-avatar-img"
+              />
+            )}
+            <div className="comment-form-fields">
+              <div className="comment-user-name">{user?.name}</div>
+              <textarea
+                className="comment-textarea"
+                placeholder="Schreibe einen Kommentar..."
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
             </div>
           </div>
-          <div className="comment-right">
-            <div className="comment-header">
-              <span className="comment-author">{c.user.name}</span>
-              <span className="comment-time">{c.time}</span>
-            </div>
-            <p className="comment-text-display">{c.text}</p>
-            <div className="comment-actions">
-              <button onClick={() => handleLike(c.id)} title="Gefällt mir">
-  {c.liked ? '💙' : '👍'}
-</button>
-              <button title="Emoji">😊</button>
-              <button title="Antworten">Antworten</button>
-              {c.user.name === user?.name && (
+          <button type="submit" className="comment-submit-btn">Kommentieren</button>
+        </form>
 
-               {/* <button onClick={() => handleDelete(c.id)} title="Kommentar löschen">🗑</button>*/}
-              )}
-            </div>
-          </div>
+        <div className="comment-list">
+          {comments.length === 0 ? (
+            <p className="no-comments">Noch keine Kommentare.</p>
+          ) : (
+            comments.map((c) => (
+              <div key={c.id} className="comment-item">
+                <div className="comment-left">
+                  {/* Show first letter of commenter's name or logo if not available */}
+                  {c.user.name ? (
+                    <div className="comment-avatar-circle">
+                      {c.user.name.charAt(0).toUpperCase()}
+                    </div>
+                  ) : (
+                    <img
+                      src={logo}
+                      alt="avatar"
+                      className="comment-avatar-img"
+                    />
+                  )}
+                </div>
+                <div className="comment-right">
+                  <div className="comment-header">
+                    <span className="comment-author">{c.user.name}</span>
+                    <span className="comment-time">{c.time}</span>
+                  </div>
+                  <p className="comment-text-display">{c.text}</p>
+                  <div className="comment-actions">
+                    <button onClick={() => handleLike(c.id)} title="Gefällt mir">
+                      {c.liked ? '💙' : '👍'}
+                    </button>
+                    <button title="Emoji">😊</button>
+                    <button title="Antworten">Antworten</button>
+                    {c.user.name === user?.name && (
+                      <button onClick={() => handleDelete(c.id)} title="Kommentar löschen">🗑</button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
-      ))
-    )}
-  </div>
-</div>
+      </div>
 
       {/* Footer */}
       <div className="event-bottom-inspire">
