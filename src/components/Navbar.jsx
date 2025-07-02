@@ -30,6 +30,8 @@ function Navbar() {
             {/* Die versteckten Navigationslinks */}
             <ul className="burger-nav-menu">
               <li className="nav-item">
+                <a href="/" className="nav-links">
+                  Home
                 <a href="/home" className="nav-links">
                   Home 
                 </a>
