@@ -291,11 +291,27 @@
   margin-bottom: 8px;
 }
 
+.comment-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
 .comment-actions button {
-  margin-right: 10px;
   background: none;
   border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0;
+  margin-right: 0;
+  flex-wrap: nowrap;
+}
+.comment-actions button:hover {
+  color: var(--skyBlue);
+  transform: scale(1.1);
 }
 /* Comment Section Styles */
 
@@ -447,4 +463,24 @@
   color: var(--deepBlue);
   margin-top: 20px;
   font-family: "Nunito", sans-serif;
+}
+/* Emoji Picker Styles */
+.emoji-picker {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  gap: 4px;
+  z-index: 10;
+}
+
+.emoji-btn {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
 }
