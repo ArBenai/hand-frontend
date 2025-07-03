@@ -14,11 +14,14 @@ import Help from './pages/Help';
 import Exchange from './pages/Exchange/Exchange';
 import ForgotPassword from './components/ForgotPassword';
 import Blog from './pages/Blog'; 
+import Uberuns from './pages/Uberuns.jsx'; // Importiere die "Über uns" Seite
+import Footer from './components/Footer.jsx'; // Importiere den Footer
 
 function App() {
   return (
     <Router>
       <Navbar /> {/* Die Navbar wird immer angezeigt, unabhängig von der Route */}
+      
       <div className="container"> {/* Optional: Ein Container für deinen Seiteninhalt */}
         <Routes>
           <Route path="/" element={<LandingPage/>} />
@@ -35,8 +38,10 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/blog" element={<Blog />} /> 
           <Route path="/profile" element={<Profile />} />
+          <Route path="/uberuns" element={<Uberuns />} /> {/* Route für die "Über uns" Seite */}
         </Routes>
       </div>
+      <Footer />
     </Router>
   );
 }

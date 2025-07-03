@@ -18,6 +18,8 @@ const EventDetail = () => {
   const [text, setText] = useState('');
   const [comments, setComments] = useState([]);
   const [event, setEvent] = useState(eventFromState); // State to hold event data
+  const emojis = ['😊', '😂', '😍', '😢', '😡', '👍', '👏', '🙌', '🎉', '❤️'];
+  const [activeEmojiPicker, setActiveEmojiPicker] = useState(null);
 
   useEffect(() => {
     if (!event) {
@@ -47,18 +49,50 @@ const handleSubmit = (e) => {
     time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
   };
 
-  setComments([newComment, ...comments]);
+ setComments(prev => [newComment, ...prev]);
   setText('');
 };
 
 function handleLike(id) {
-  console.log("Liked comment with ID:", id);
-  // You can implement like logic here later
+  setComments(prev =>
+    prev.map(comment =>
+      comment.id === id
+        ? { ...comment, liked: !comment.liked }
+        : comment
+    )
+  );
+}
+const handleEmoji = (id, emoji) => {
+  setComments(prev =>
+    prev.map(comment =>
+      comment.id === id
+        ? { ...comment, text: comment.text + ' ' + emoji }
+        : comment
+    )
+  );
+  setActiveEmojiPicker(null); // Hide emoji picker after selecting an emoji
+};
+
+const handleReply = (name) => {
+  setText(prev => `@${name} ` + prev);
+};
+
+function handleEdit(id) {
+  const newText = prompt('Bearbeite deinen Kommentar:');
+  if (newText && newText.trim()) {
+    setComments(prev =>
+      prev.map(comment =>
+        comment.id === id
+          ? { ...comment, text: newText }
+          : comment
+      )
+    );
+  }
 }
 
-const handleDelete = (id) => {
-  setComments(comments.filter((c) => c.id !== id));
-};
+  function handleDelete(id) {
+    setComments(comments.filter((c) => c.id !== id));
+  }
 
 const goBack = () => {
   window.history.back();
@@ -156,8 +190,26 @@ return (
                     <button onClick={() => handleLike(c.id)} title="Gefällt mir">
                       {c.liked ? '💙' : '👍'}
                     </button>
-                    <button title="Emoji">😊</button>
-                    <button title="Antworten">Antworten</button>
+                    <div style={{ position: 'relative' }}>
+  <button onClick={() => setActiveEmojiPicker(c.id)} title="Emoji">😊</button>
+
+  {activeEmojiPicker === c.id && (
+    <div className="emoji-picker">
+      {emojis.map((emoji) => (
+        <button
+          key={emoji}
+          className="emoji-btn"
+          onClick={() => handleEmoji(c.id, emoji)}
+        >
+          {emoji}
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+
+                    <button onClick={() => handleReply(c.user.name)} title="Antworten">Antworten</button>
+                    <button onClick={() => handleEdit(c.id)} title="Bearbeiten">Bearbeiten</button>
                     {c.user.name === user?.name && (
                       <button onClick={() => handleDelete(c.id)} title="Kommentar löschen">🗑</button>
                     )}

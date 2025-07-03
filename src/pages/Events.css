@@ -154,32 +154,3 @@
 }
 
 
-/*------ FOOTER-----*/
-.events-footer {
-  background-color: var(--coral);
-  color: white;
-  text-align: center;
-  padding: 24px 32px;
-  font-size: 15px;
-  font-family: "Nunito", sans-serif;
-  width: 100%;
-  box-sizing:border-box;
-  margin-top: 40px;
-  margin-bottom: 8px;
-
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-}
-
-.events-footer p {
-  padding: 16px 0;
-  margin: 0;
-  line-height: 1.6;
-}
-.events-footer a {
-  color: var(--deepBlue);
-  text-decoration: none;
-  font-weight: bold;
-}
-.events-footer a:hover {
-  text-decoration: underline;
-}

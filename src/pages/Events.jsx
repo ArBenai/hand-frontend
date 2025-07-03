@@ -96,10 +96,7 @@ const Events = () => {
         ))}
       </div>
      {/* Footer */}
-      <footer className="events-footer">
-        <p>© 2025 Hand in Hand - Alle Rechte vorbehalten.</p>
-        <p>Kontakt | Impressum | Datenschutz</p>
-      </footer>
+      
     </div>  
     
   );
