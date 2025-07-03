@@ -24,9 +24,9 @@ function LandingPage() {
         <h1>Willkommen in Hand in Hand</h1>
         <p>Gemeinsam in der Nachbarschaft helfen und verbunden bleiben.</p>
         <div className="cta-buttons">
-          <a href="#!" className="btn primary">Jetzt Registieren</a>
-          <a href="#!" className="btn secondary">Mehr Erfahren</a>
-                  </div>
+          <a href="./Register" className="btn primary">Jetzt Registieren</a>
+          <a href="./Uberuns" className="btn secondary">Mehr Erfahren</a>
+        </div>
  {/* Events */}
       <section id="events" className="section-block section-colored">
         <h2>🎉 Events in deiner Nähe</h2>
@@ -69,18 +69,7 @@ function LandingPage() {
         <button className="btn primary">Hilfeseite öffnen</button>
       </section>
       
-     {/* Footer */}
-      <footer className="app-footer">
-        <div className="footer-content">
-          <div className="footer-links">
-            <a href="#events">Events</a>
-            <a href="#verschenke">Verschenke</a>
-            <a href="#blog">Blog</a>
-            <a href="#hilfe">Hilfe</a>
-          </div>
-     <p>&copy; {new Date().getFullYear()} Hand in Hand – Nachbarschaft verbindet. All rights reserved by Rea,Dominik,Nazli,Dogmar,Brian,Arben.</p>
-  </div>
-</footer>
+    
       </section>
     </div>
   );
