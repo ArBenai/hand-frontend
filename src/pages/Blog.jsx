@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Calendar, User, Search, Tag, PlusCircle } from 'lucide-react';
+import { Calendar, User, Search, Tag, PlusCircle, XCircle } from 'lucide-react'; // XCircle für Schließen-Button im Popup
 import './Blog.css';
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('alle');
-  const [blogPosts, setBlogPosts] = useState([ // Umbenannt von postData zu blogPosts, da keine dynamischen Änderungen an Likes mehr nötig sind
+  const [blogPosts, setBlogPosts] = useState([
     {
       id: 1,
       title: "Wie wir unseren Kiez grüner gemacht haben",
@@ -74,6 +74,17 @@ const Blog = () => {
     }
   ]);
 
+  const [showWritePostPopup, setShowWritePostPopup] = useState(false); // Neuer Zustand für das Popup
+  const [newPost, setNewPost] = useState({ // Zustand für das neue Formular
+    title: '',
+    excerpt: '',
+    content: '',
+    author: '',
+    category: 'umwelt', // Standardkategorie
+    image: '',
+    readTime: ''
+  });
+
 
   const categories = [
     { value: 'alle', label: 'Alle Beiträge' },
@@ -85,15 +96,13 @@ const Blog = () => {
     { value: 'wirtschaft', label: 'Lokale Wirtschaft' }
   ];
 
-  const filteredPosts = blogPosts.filter(post => { // Verwendet jetzt blogPosts statt postData
+  const filteredPosts = blogPosts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          post.author.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'alle' || post.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
-
-  // 'toggleLike' Funktion entfernt
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -110,13 +119,56 @@ const Blog = () => {
 
   const handleReadMore = (postId) => {
     console.log(`"Weiterlesen" für Beitrag ID: ${postId} geklickt.`);
-    alert(`Artikel "${blogPosts.find(p => p.id === postId)?.title}" wird geladen.`); // Verwendet blogPosts
+    alert(`Artikel "${blogPosts.find(p => p.id === postId)?.title}" wird geladen.`);
   };
 
   const handleWritePost = () => {
-    console.log("Button 'Beitrag schreiben' geklickt.");
-    alert("Funktion 'Beitrag schreiben' wird geöffnet.");
+    setShowWritePostPopup(true); // Popup öffnen
   };
+
+  const handleClosePopup = () => {
+    setShowWritePostPopup(false); // Popup schließen
+    setNewPost({ // Formular zurücksetzen
+      title: '',
+      excerpt: '',
+      content: '',
+      author: '',
+      category: 'umwelt',
+      image: '',
+      readTime: ''
+    });
+  };
+
+  const handleNewPostChange = (e) => {
+    const { name, value } = e.target;
+    setNewPost(prevPost => ({
+      ...prevPost,
+      [name]: value
+    }));
+  };
+
+  const handleNewPostSubmit = (e) => {
+    e.preventDefault();
+    if (!newPost.title || !newPost.content || !newPost.author || !newPost.category) {
+      alert("Bitte füllen Sie alle erforderlichen Felder aus (Titel, Inhalt, Autor, Kategorie).");
+      return;
+    }
+
+    const today = new Date();
+    const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+    const newBlogEntry = {
+      id: blogPosts.length > 0 ? Math.max(...blogPosts.map(post => post.id)) + 1 : 1,
+      ...newPost,
+      date: formattedDate,
+      image: newPost.image || 'https://images.unsplash.com/photo-1507525428034-b723cf961c3e?w=600&h=300&fit=crop' // Standardbild, wenn keines eingegeben wird
+    };
+
+    setBlogPosts(prevPosts => [newBlogEntry, ...prevPosts]); // Neuen Beitrag oben hinzufügen
+    handleClosePopup(); // Popup schließen und Formular zurücksetzen
+    alert("Ihr Beitrag wurde erfolgreich hinzugefügt!");
+  };
+
 
   return (
     <div className="blog-container">
@@ -247,6 +299,99 @@ const Blog = () => {
           </div>
         </aside>
       </div>
+
+      {/* Das Popup-Fenster */}
+      {showWritePostPopup && (
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <button className="close-popup-btn" onClick={handleClosePopup} aria-label="Popup schließen">
+              <XCircle size={24} />
+            </button>
+            <h2>Neuen Blogbeitrag schreiben</h2>
+            <form onSubmit={handleNewPostSubmit} className="new-post-form">
+              <div className="form-group">
+                <label htmlFor="post-title">Titel:</label>
+                <input
+                  type="text"
+                  id="post-title"
+                  name="title"
+                  value={newPost.title}
+                  onChange={handleNewPostChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="post-excerpt">Kurzbeschreibung (Excerpt):</label>
+                <textarea
+                  id="post-excerpt"
+                  name="excerpt"
+                  value={newPost.excerpt}
+                  onChange={handleNewPostChange}
+                  rows="2"
+                ></textarea>
+              </div>
+              <div className="form-group">
+                <label htmlFor="post-content">Inhalt:</label>
+                <textarea
+                  id="post-content"
+                  name="content"
+                  value={newPost.content}
+                  onChange={handleNewPostChange}
+                  rows="6"
+                  required
+                ></textarea>
+              </div>
+              <div className="form-group">
+                <label htmlFor="post-author">Autor:</label>
+                <input
+                  type="text"
+                  id="post-author"
+                  name="author"
+                  value={newPost.author}
+                  onChange={handleNewPostChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="post-category">Kategorie:</label>
+                <select
+                  id="post-category"
+                  name="category"
+                  value={newPost.category}
+                  onChange={handleNewPostChange}
+                >
+                  {categories.slice(1).map(category => ( // Alle außer "Alle Beiträge"
+                    <option key={category.value} value={category.value}>
+                      {category.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="post-image">Bild-URL (optional):</label>
+                <input
+                  type="url"
+                  id="post-image"
+                  name="image"
+                  value={newPost.image}
+                  onChange={handleNewPostChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="post-readtime">Lesezeit (z.B. "5 min", optional):</label>
+                <input
+                  type="text"
+                  id="post-readtime"
+                  name="readTime"
+                  value={newPost.readTime}
+                  onChange={handleNewPostChange}
+                />
+              </div>
+              <button type="submit" className="submit-post-btn">Beitrag hinzufügen</button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
