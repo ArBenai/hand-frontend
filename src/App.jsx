@@ -16,6 +16,7 @@ import ForgotPassword from './components/ForgotPassword';
 import Blog from './pages/Blog'; 
 import Uberuns from './pages/Uberuns.jsx'; // Importiere die "Über uns" Seite
 import Footer from './components/Footer.jsx'; // Importiere den Footer
+import PageNotFound from './pages/PageNotFound.jsx'; // Importiere die 404-Seite
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/blog" element={<Blog />} /> 
           <Route path="/profile" element={<Profile />} />
           <Route path="/uberuns" element={<Uberuns />} /> {/* Route für die "Über uns" Seite */}
+          <Route path="*" element={<PageNotFound />} /> {/* Fallback für nicht gefundene Seiten */}
         </Routes>
       </div>
       <Footer />
