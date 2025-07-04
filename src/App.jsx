@@ -13,6 +13,7 @@ import EventRegister from './pages/EventRegister.jsx';
 import Help from './pages/Help';
 import Exchange from './pages/Exchange/Exchange';
 import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword.jsx';
 import Blog from './pages/Blog'; 
 import Uberuns from './pages/Uberuns.jsx'; // Importiere die "Über uns" Seite
 import Footer from './components/Footer.jsx'; // Importiere den Footer
@@ -37,6 +38,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/exchange/*" element={<Exchange />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/blog" element={<Blog />} /> 
           <Route path="/profile" element={<Profile />} />
           <Route path="/uberuns" element={<Uberuns />} /> {/* Route für die "Über uns" Seite */}
