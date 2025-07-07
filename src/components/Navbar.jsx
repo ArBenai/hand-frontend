@@ -53,7 +53,7 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <a href="/help" className="nav-links">
-                  Hilfe
+                  Frage
                 </a>
               </li>
               <li className="nav-item">
