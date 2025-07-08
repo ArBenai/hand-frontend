@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./PageNotFound.css"; 
 import Lottie from "lottie-react";
-import errorAnimation from "../assets/animation/Animation - 1751888080091.json"; // Importiere die Lottie-Animation
+import errorAnimation from "../assets/animation/Animation - error.json";
 
 
 
