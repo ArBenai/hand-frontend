@@ -25,22 +25,21 @@ function LandingPage() {
         <p>Gemeinsam in der Nachbarschaft helfen und verbunden bleiben.</p>
         <div className="cta-buttons">
           <a href="./Register" className="btn primary">Jetzt Registieren</a>
-          <a href="./Uberuns" className="btn secondary">Mehr Erfahren</a>
+          <a href="./Uberuns" className="btn secondary">Über uns</a>
         </div>
- {/* Events */}
-      <section id="events" className="section-block section-colored">
-        <h2>🎉 Events in deiner Nähe</h2>
-        <img src={landingphoto1} alt="nachbarschafts-event" />
-        <p>Entdecke lokale Veranstaltungen und triff Nachbarn.</p>
-        <button className="btn primary">Alle Events ansehen</button>
-      </section>
+{/* Events */}
+<section id="events" className="section-block section-colored">
+  <h2>🎉 Events in deiner Nähe</h2>
+  <img src={landingphoto1} alt="nachbarschafts-event" />
+  <p>Entdecke lokale Veranstaltungen und triff Nachbarn.</p>
+  <a href="./Events" className="btn primary">Alle Events</a>
+</section>
 
-      {/* Verschenke */}
       <section id="verschenke" className="section-block">
         <h2>🎁 Verschenke & Tausche</h2>
         <img src={landingphoto2} alt="verschenke-event" />
         <p>Gib Dingen ein zweites Leben – verschenke oder tausche mit Nachbarn.</p>
-        <button className="btn primary">Angebote ansehen</button>
+        <a href="./Exchange" className="btn primary">Angebote ansehen</a>
       </section>
 
       {/* Blog */}
@@ -48,7 +47,7 @@ function LandingPage() {
         <h2>📝 Blog & Geschichten</h2>
         <img src={landingphoto3} alt="blog-event" />
         <p>Erfahre mehr über inspirierende Nachbarschaftsprojekte und Tipps.</p>
-        <button className="btn primary">Zum Blog</button>
+        <a href="./Blog" className="btn primary">Zum Blog</a>
       </section>
 
       {/* Ask */}
@@ -56,20 +55,19 @@ function LandingPage() {
         <h2>❓ Häufige Fragen</h2>
         <img src={landingphoto5} alt="faq-event" />
         <p>Du hast Fragen? Wir haben Antworten für dich gesammelt.</p>
-        <button className="btn secondary">Zu den FAQs</button>
+        <a href="./Help" className="btn secondary">Häufige Fragen</a>
       </section>
 
-      {/* Hilfe */}
-      <section id="hilfe" className="section-block help-bg">
+     {/* {/* Hilfe */}
+     {/*} <section id="hilfe" className="section-block help-bg">
         <h2>🤝 Hilfe & Unterstützung</h2>
         <img src={landingphoto4} alt="hilfe-event" />
         <p>Unsere Community steht dir bei Fragen und Anliegen zur Seite.</p>
         <p>Hier findest du Antworten auf häufige Fragen und kannst uns direkt kontaktieren.</p>
         <p>Brauchst du Hilfe oder Unterstützung? Wir sind für dich da.</p>
         <button className="btn primary">Hilfeseite öffnen</button>
-      </section>
-      
-    
+      </section> */}
+
       </section>
     </div>
   );
