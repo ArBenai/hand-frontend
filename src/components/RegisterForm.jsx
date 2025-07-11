@@ -15,45 +15,33 @@ const RegisterForm = ({ onSuccess }) => {
     street: '',
     city: '',
     district: '',
+    state: '',       // Neu hinzugefügt, da in Backend verlangt
     zip: '',
   });
 
-  // Speichert, ob Feld verlassen wurde UND Inhalt hat
-  const [touchedFields, setTouchedFields] = useState({
-    nickname: false,
-    email: false,
-    password: false,
-    firstName: false,
-    lastName: false,
-    street: false,
-    city: false,
-    district: false,
-    zip: false,
-  });
-
-  const [message, setMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState('');
 
+  // Einfaches Feld-Update
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleBlur = (e) => {
-    const { name, value } = e.target;
-    const isFilled = value.trim() !== '';
-    setTouchedFields((prev) => ({
-      ...prev,
-      [name]: isFilled,
-    }));
-  };
-
-  const validateForm = () => {
+  // Validierung aller Felder (inkl. State)
+  const validate = () => {
     const errors = {};
-    Object.keys(formData).forEach((key) => {
-      if (!formData[key].trim()) {
+    Object.entries(formData).forEach(([key, val]) => {
+      if (!val.trim()) {
         errors[key] = 'Dieses Feld darf nicht leer sein.';
+      } else {
+        if (key === 'email' && !/\S+@\S+\.\S+/.test(val)) {
+          errors[key] = 'Ungültige E-Mail-Adresse.';
+        }
+        if (key === 'zip' && !/^\d{4,5}$/.test(val)) {
+          errors[key] = 'Ungültige PLZ.';
+        }
       }
     });
     return errors;
@@ -61,19 +49,15 @@ const RegisterForm = ({ onSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setMessage('');
-    setFormErrors({});
+    const errors = validate();
+    setFormErrors(errors);
+    if (Object.keys(errors).length) return;
 
-    const errors = validateForm();
-    if (Object.keys(errors).length > 0) {
-      setFormErrors(errors);
-      setIsSubmitting(false);
-      return;
-    }
+    setIsSubmitting(true);
 
     try {
-      const response = await fetch('http://localhost:3000/api/register', {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -86,22 +70,24 @@ const RegisterForm = ({ onSuccess }) => {
             street: formData.street,
             city: formData.city,
             district: formData.district,
+            state: formData.state,
             zip: parseInt(formData.zip, 10),
           },
         }),
       });
 
       const data = await response.json();
+
       if (response.ok) {
         localStorage.setItem('token', data.token);
-        onSuccess(data);
+        if(onSuccess) onSuccess(data);
         navigate('/login');
       } else {
         setMessage(`❌ Fehler: ${data.message || 'Unbekannter Fehler'}`);
       }
     } catch (error) {
-      console.error(error);
-      setMessage('❌ Serverfehler.');
+      console.error('Fehler beim Registrieren:', error);
+      setMessage('❌ Serverfehler. Bitte später erneut versuchen.');
     } finally {
       setIsSubmitting(false);
     }
@@ -116,6 +102,7 @@ const RegisterForm = ({ onSuccess }) => {
     street: 'Straße',
     city: 'Stadt',
     district: 'Landkreis oder Stadtteil',
+    state: 'Bundesland',
     zip: 'PLZ',
   };
 
@@ -125,42 +112,31 @@ const RegisterForm = ({ onSuccess }) => {
         <img src={logo} alt="Logo" className="animated-logo" />
       </div>
 
-      <form onSubmit={handleSubmit} className="register-form" noValidate>
-        {Object.keys(fieldLabels).map((field) => (
-          <label key={field} className="register-label">
-            {fieldLabels[field]}:
+      <form className="register-form" onSubmit={handleSubmit} noValidate>
+        {Object.entries(fieldLabels).map(([key, label]) => (
+          <label key={key} className="register-label">
+            {label}:
             <input
+              name={key}
               type={
-                field === 'email'
-                  ? 'email'
-                  : field === 'password'
-                  ? 'password'
-                  : field === 'zip'
-                  ? 'number'
-                  : 'text'
+                key === 'email' ? 'email'
+                : key === 'password' ? 'password'
+                : key === 'zip' ? 'number'
+                : 'text'
               }
-              name={field}
-              value={formData[field]}
+              value={formData[key]}
               onChange={handleChange}
-              onBlur={handleBlur}
-              required
-              className={`register-input ${
-                touchedFields[field] ? 'filled' : ''
-              }`}
-              // placeholder={fieldLabels[field]}
               autoComplete="off"
+              className={`register-input ${formErrors[key] ? 'error' : ''}`}
+              required
             />
-            {formErrors[field] && (
-              <p className="register-warning">{formErrors[field]}</p>
+            {formErrors[key] && (
+              <p className="register-warning">{formErrors[key]}</p>
             )}
           </label>
         ))}
 
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className={`register-button ${isSubmitting ? 'disabled' : ''}`}
-        >
+        <button type="submit" disabled={isSubmitting} className="register-button">
           {isSubmitting ? 'Wird gesendet…' : 'Registrieren'}
         </button>
 

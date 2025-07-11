@@ -32,6 +32,7 @@ function Navbar() {
               <li className="nav-item">
                 <a href="/" className="nav-links">
                   Home
+                </a>
                 <a href="/home" className="nav-links">
                   Home 
                 </a>

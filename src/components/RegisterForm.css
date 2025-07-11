@@ -20,10 +20,11 @@
 }
 
 .register-form input {
-  width: 100%;
+  width: 400PX;
   padding: 0.6em;
+  display: block;
   border: 1px solid #ccc;
-  border-radius: 20px;
+  border-radius: 50px;
   font-size: 1.1em;
   margin-top: 0.3em;
   font-weight: bold;
