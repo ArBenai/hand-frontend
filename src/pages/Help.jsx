@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import './Help.css'; // Import the CSS file
+import React, { useState } from "react";
+import "./Help.css"; // Import the CSS file
 
 function Help() {
-  const [questions, setQuestions] = useState([
-  ]);
-  const [newQuestion, setNewQuestion] = useState('');
+  const [questions, setQuestions] = useState([]);
+  const [newQuestion, setNewQuestion] = useState("");
   const [answerText, setAnswerText] = useState({});
 
   const handleNewQuestionChange = (event) => {
@@ -14,14 +13,21 @@ function Help() {
   const handleAskQuestion = (event) => {
     event.preventDefault();
     if (newQuestion.trim()) {
-      const questionId = questions.length > 0 ? Math.max(...questions.map(q => q.id)) + 1 : 1;
-      const newUser = "Aktueller Nutzer"; 
-      const newDate = new Date().toISOString().split('T')[0];
+      const questionId =
+        questions.length > 0 ? Math.max(...questions.map((q) => q.id)) + 1 : 1;
+      const newUser = "Aktueller Nutzer";
+      const newDate = new Date().toISOString().split("T")[0];
       setQuestions([
         ...questions,
-        { id: questionId, user: newUser, question: newQuestion.trim(), date: newDate, answers: [] }
+        {
+          id: questionId,
+          user: newUser,
+          question: newQuestion.trim(),
+          date: newDate,
+          answers: [],
+        },
       ]);
-      setNewQuestion('');
+      setNewQuestion("");
     }
   };
 
@@ -31,34 +37,41 @@ function Help() {
 
   const handleAddAnswer = (questionId) => {
     if (answerText[questionId] && answerText[questionId].trim()) {
-      const updatedQuestions = questions.map(q => {
+      const updatedQuestions = questions.map((q) => {
         if (q.id === questionId) {
-          const answerId = q.answers.length > 0 ? Math.max(...q.answers.map(a => a.id)) + 1 : 1;
-          const newUser = "Aktueller Nutzer"; 
-          const newDate = new Date().toISOString().split('T')[0];
+          const answerId =
+            q.answers.length > 0
+              ? Math.max(...q.answers.map((a) => a.id)) + 1
+              : 1;
+          const newUser = "Aktueller Nutzer";
+          const newDate = new Date().toISOString().split("T")[0];
           return {
             ...q,
-            answers: [...q.answers, { id: answerId, user: newUser, answer: answerText[questionId].trim(), date: newDate }]
+            answers: [
+              ...q.answers,
+              {
+                id: answerId,
+                user: newUser,
+                answer: answerText[questionId].trim(),
+                date: newDate,
+              },
+            ],
           };
         }
         return q;
       });
       setQuestions(updatedQuestions);
-      setAnswerText({ ...answerText, [questionId]: '' });
+      setAnswerText({ ...answerText, [questionId]: "" });
     }
   };
 
   return (
     <div className="help-container">
       <div className="help-wrapper">
-        <header className="help-header">
-          <div className="header-content">
-            <div className="header-text">
-              <h1 className="h1-text">Deine Fragen, unsere Antworten</h1>
-              <p>Stell eine Frage an die Community oder hilf anderen mit deinem Wissen.</p>
-            </div>
-          </div>
-        </header>
+        <div className="help-animated-header">
+          <h1>Hilfe & Support</h1>
+          <p>Fragen stellen und Antworten finden</p>
+        </div>
 
         <section className="help-content">
           <div className="form-section section-block">
@@ -77,7 +90,9 @@ function Help() {
                   ></textarea>
                 </div>
               </div>
-              <button type="submit" className="btn primary ask-btn">Frage stellen</button>
+              <button type="submit" className="btn primary ask-btn">
+                Frage stellen
+              </button>
             </form>
           </div>
 
@@ -91,7 +106,9 @@ function Help() {
                   <div key={q.id} className="question-item">
                     <div className="question-header">
                       <h3>{q.question}</h3>
-                      <span className="question-meta">Gestellt von {q.user} am {q.date}</span>
+                      <span className="question-meta">
+                        Gestellt von {q.user} am {q.date}
+                      </span>
                     </div>
                     {q.answers.length > 0 && (
                       <div className="answers-list">
@@ -99,7 +116,9 @@ function Help() {
                         {q.answers.map((a) => (
                           <div key={a.id} className="answer-item">
                             <p>{a.answer}</p>
-                            <span className="answer-meta">Beantwortet von {a.user} am {a.date}</span>
+                            <span className="answer-meta">
+                              Beantwortet von {a.user} am {a.date}
+                            </span>
                           </div>
                         ))}
                       </div>
@@ -110,11 +129,16 @@ function Help() {
                           className="answer-input"
                           placeholder="Deine Antwort..."
                           rows="2"
-                          value={answerText[q.id] || ''}
+                          value={answerText[q.id] || ""}
                           onChange={(e) => handleAnswerChange(q.id, e)}
                         ></textarea>
                       </div>
-                      <button onClick={() => handleAddAnswer(q.id)} className="btn primary answer-btn">Antworten</button>
+                      <button
+                        onClick={() => handleAddAnswer(q.id)}
+                        className="btn primary answer-btn"
+                      >
+                        Antworten
+                      </button>
                     </div>
                   </div>
                 ))}
@@ -126,6 +150,5 @@ function Help() {
     </div>
   );
 }
-
 
 export default Help;
