@@ -48,6 +48,35 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-wrap: nowrap;
+  max-width: 1200px;
+  padding: 2rem;
+  width: 100%;
+  gap: 3rem;
+}
+
+.animation-container {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 0;
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 900px) {
+  .register-form-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .animation-container {
+    justify-content: center;
+    margin-right: 0;
+    margin-bottom: 2rem;
+  }
   z-index: 2;
   max-width: 600px;
   width: 100%;
@@ -83,6 +112,16 @@
   margin: 0 auto;
   font-family: "Nunito", sans-serif;
   position: relative; /* For background pattern */
+}
+.register-titel {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+
+  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+
 }
 .register-form-grid {
   display: grid;
