@@ -21,7 +21,6 @@ function Login() {
       ...formData,
       [e.target.name]: e.target.value
     });
-    // Clear errors when user starts typing
     if (error) setError('');
   };
 
@@ -33,15 +32,38 @@ function Login() {
 
     setIsLoading(true);
     setError('');
-    
-    // Simulation für Demo
-    setTimeout(() => {
-      console.log('Login attempt:', { username: formData.username, password: formData.password });
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nickname: formData.username,
+          password: formData.password
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Login fehlgeschlagen');
+      }
+
+      // ✅ Token & User im localStorage speichern
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('currentUser', JSON.stringify(data.user));
+
+      console.log('✅ Eingeloggt als:', data.user.nickname);
+
+      // Weiterleitung nach Login
+      navigate('/dashboard'); // Passe das Ziel ggf. an
+
+    } catch (err) {
+      console.error('❌ Login-Fehler:', err.message);
+      setError(err.message);
+    } finally {
       setIsLoading(false);
-      alert('Login erfolgreich! (Demo)');
-      // Nach erfolgreichem Login weiterleiten:
-      // navigate('/dashboard');
-    }, 1500);
+    }
   };
 
   const handleForgotPassword = async () => {
@@ -50,7 +72,6 @@ function Login() {
       return;
     }
 
-    // E-Mail-Format validieren
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setError('Bitte geben Sie eine gültige E-Mail-Adresse ein');
@@ -59,22 +80,20 @@ function Login() {
 
     setIsLoading(true);
     setError('');
-    
+
     try {
-      // Hier würdest du deine Passwort-Reset-Logik implementieren
-      // Simulation für Demo
+      // Simuliere Senden der E-Mail
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      console.log('Password reset for:', formData.email);
+
+      console.log('📧 Passwort-Reset für:', formData.email);
       setSuccessMessage('📧 E-Mail wurde gesendet! Sie werden zur Bestätigungsseite weitergeleitet...');
-      
-      // Nach 2 Sekunden zur ausführlichen ForgotPassword-Seite weiterleiten
+
       setTimeout(() => {
-        navigate('/forgot-password', { 
-          state: { email: formData.email } // E-Mail-Adresse mitgeben
+        navigate('/forgot-password', {
+          state: { email: formData.email }
         });
       }, 2000);
-      
+
     } catch (error) {
       setError('Fehler beim Senden der E-Mail. Bitte versuchen Sie es erneut.');
     } finally {
@@ -84,11 +103,7 @@ function Login() {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      if (showForgotPassword) {
-        handleForgotPassword();
-      } else {
-        handleLogin();
-      }
+      showForgotPassword ? handleForgotPassword() : handleLogin();
     }
   };
 
@@ -98,25 +113,17 @@ function Login() {
 
   return (
     <div className="login-page-wrapper">
-      {/* Background Pattern */}
       <div className="background-pattern-container">
         <div className="background-pattern"></div>
       </div>
 
-      {/* Login Container */}
       <div className="login-main-container">
-        {/* Back Button */}
-        <button
-          onClick={goBack}
-          className="back-button"
-        >
+        <button onClick={goBack} className="back-button">
           <ArrowLeft size={20} className="back-button-icon" />
           Zurück
         </button>
 
-        {/* Main Card */}
         <div className="login-card">
-          {/* Header with Gradient */}
           <div className="login-card-header">
             <div className="header-icon-wrapper">
               <User size={32} className="header-icon" />
@@ -125,19 +132,15 @@ function Login() {
               {showForgotPassword ? 'Passwort zurücksetzen' : 'Willkommen zurück'}
             </h1>
             <p className="header-subtitle">
-              {showForgotPassword 
+              {showForgotPassword
                 ? 'Gib deine E-Mail-Adresse ein um fortzufahren'
-                : 'Logge dich ein, um fortzufahren und der Nachbartschaft zu helfen.'
-              }
+                : 'Logge dich ein, um fortzufahren und der Nachbartschaft zu helfen.'}
             </p>
           </div>
 
-          {/* Form Content */}
           <div className="login-card-content">
-            {/* Login Form */}
             {!showForgotPassword ? (
               <div className="form-section login-form">
-                {/* Username Field */}
                 <div className="input-group">
                   <User size={20} className="input-icon" />
                   <input
@@ -151,7 +154,6 @@ function Login() {
                   />
                 </div>
 
-                {/* Password Field */}
                 <div className="input-group">
                   <Lock size={20} className="input-icon" />
                   <input
@@ -172,14 +174,8 @@ function Login() {
                   </button>
                 </div>
 
-                {/* Error Message */}
-                {error && (
-                  <div className="error-message">
-                    ❌ {error}
-                  </div>
-                )}
+                {error && <div className="error-message">❌ {error}</div>}
 
-                {/* Remember Me & Forgot Password */}
                 <div className="form-options">
                   <label className="remember-me-checkbox">
                     <input type="checkbox" />
@@ -194,7 +190,6 @@ function Login() {
                   </button>
                 </div>
 
-                {/* Login Button */}
                 <button
                   onClick={handleLogin}
                   disabled={isLoading}
@@ -211,9 +206,7 @@ function Login() {
                 </button>
               </div>
             ) : (
-              /* Forgot Password Form */
               <div className="form-section forgot-password-form">
-                {/* Email Field */}
                 <div className="input-group">
                   <Mail size={20} className="input-icon" />
                   <input
@@ -227,27 +220,13 @@ function Login() {
                   />
                 </div>
 
-                {/* Error/Success Messages */}
-                {error && (
-                  <div className="error-message">
-                    ❌ {error}
-                  </div>
-                )}
-                
-                {successMessage && (
-                  <div className="success-message">
-                    {successMessage}
-                  </div>
-                )}
+                {error && <div className="error-message">❌ {error}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
 
-                {/* Info Text */}
                 <div className="info-box">
-                  <p>
-                    📧 Du erhältst eine E-Mail mit einem Link zum Zurücksetzen deines Passworts.
-                  </p>
+                  <p>📧 Du erhältst eine E-Mail mit einem Link zum Zurücksetzen deines Passworts.</p>
                 </div>
 
-                {/* Buttons */}
                 <div className="button-group">
                   <button
                     onClick={handleForgotPassword}
@@ -265,7 +244,7 @@ function Login() {
                       'E-Mail senden'
                     )}
                   </button>
-                  
+
                   <button
                     onClick={() => {
                       setShowForgotPassword(false);
@@ -278,7 +257,6 @@ function Login() {
                     Zurück zum Login
                   </button>
 
-                  {/* Link zur ausführlichen Seite */}
                   <button
                     onClick={() => navigate('/forgot-password')}
                     className="link-button"
@@ -290,26 +268,20 @@ function Login() {
               </div>
             )}
 
-            {/* Footer */}
             <div className="card-footer">
               <div className="separator">
                 <span>oder</span>
               </div>
               <p className="register-prompt">
-                Noch kein Konto? 
-                <a href="/register" className="register-link">
-                  Jetzt registrieren
-                </a>
+                Noch kein Konto?
+                <a href="/register" className="register-link"> Jetzt registrieren</a>
               </p>
             </div>
           </div>
         </div>
 
-        {/* Additional Info */}
         <div className="additional-info">
-          <p>
-            🔒 Deine Daten sind sicher und werden verschlüsselt übertragen
-          </p>
+          <p>🔒 Deine Daten sind sicher und werden verschlüsselt übertragen</p>
         </div>
       </div>
     </div>

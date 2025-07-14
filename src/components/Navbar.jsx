@@ -33,8 +33,6 @@ function Navbar() {
                 <a href="/home" className="nav-links">
                   Home 
                 </a>
-                <a href="/" className="nav-links">
-                  Home </a>
               </li>
               <li className='nav-item'>
                 <a href="/exchange" className="nav-links">
@@ -53,7 +51,7 @@ function Navbar() {
               </li>
               <li className="nav-item">
                 <a href="/help" className="nav-links">
-                  Frage
+                  Hilfe & Support
                 </a>
               </li>
               <li className="nav-item">
