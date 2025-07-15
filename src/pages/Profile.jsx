@@ -115,7 +115,6 @@ const Profile = () => {
   return (
     <div className="profile-container">
       <div className="profile-wrapper">
-        {/* Header */}
         <div className="profile-header">
           <div className="header-content">
             <div className="header-text">
