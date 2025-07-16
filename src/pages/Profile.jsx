@@ -311,7 +311,7 @@ const Profile = () => {
                               disabled={address.isPrimary}
                               title={address.isPrimary ? "Hauptadresse kann nicht gelöscht werden" : "Adresse löschen"}
                             >
-                              🗑️
+                              Adresse entfernen
                             </button>
                           </div>
                         )}
