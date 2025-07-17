@@ -1,99 +1,107 @@
-import React, { useState } from 'react';
-import './Profile.css';
+import React, { useState } from "react";
+import "./Profile.css";
+import UserPostsSection from "./UserPostsSection";
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
-    username: 'max_mustermann',
-    email: 'max.mustermann@email.com',
-    password: '••••••••••',
-    firstName: 'Max',
-    lastName: 'Mustermann',
+    username: "max_mustermann",
+    email: "max.mustermann@email.com",
+    password: "••••••••••",
+    firstName: "Max",
+    lastName: "Mustermann",
     profileImage: null,
     addresses: [
       {
         id: 1,
-        type: 'Hauptadresse',
-        district: 'München Nord',
-        city: 'München',
-        zip: '80331',
-        street: 'Musterstraße 123',
-        isPrimary: true
-      }
-    ]
+        type: "Hauptadresse",
+        district: "München Nord",
+        city: "München",
+        zip: "80331",
+        street: "Musterstraße 123",
+        isPrimary: true,
+      },
+    ],
   });
 
-  const [editData, setEditData] = useState({ ...profileData, addresses: [...profileData.addresses] });
+  const [editData, setEditData] = useState({
+    ...profileData,
+    addresses: [...profileData.addresses],
+  });
 
   const handleEdit = () => {
     setIsEditing(true);
-    setEditData({ 
-      ...profileData, 
-      addresses: profileData.addresses.map(addr => ({ ...addr }))
+    setEditData({
+      ...profileData,
+      addresses: profileData.addresses.map((addr) => ({ ...addr })),
     });
   };
 
   const handleSave = () => {
-    setProfileData({ 
-      ...editData, 
-      addresses: editData.addresses.map(addr => ({ ...addr }))
+    setProfileData({
+      ...editData,
+      addresses: editData.addresses.map((addr) => ({ ...addr })),
     });
     setIsEditing(false);
   };
 
   const handleCancel = () => {
-    setEditData({ 
-      ...profileData, 
-      addresses: profileData.addresses.map(addr => ({ ...addr }))
+    setEditData({
+      ...profileData,
+      addresses: profileData.addresses.map((addr) => ({ ...addr })),
     });
     setIsEditing(false);
   };
 
   const handleInputChange = (field, value) => {
-    setEditData(prev => ({ ...prev, [field]: value }));
+    setEditData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleAddressChange = (addressId, field, value) => {
-    setEditData(prev => ({
+    setEditData((prev) => ({
       ...prev,
-      addresses: prev.addresses.map(addr =>
+      addresses: prev.addresses.map((addr) =>
         addr.id === addressId ? { ...addr, [field]: value } : addr
-      )
+      ),
     }));
   };
 
   const addNewAddress = () => {
     const newAddress = {
       id: Date.now(),
-      type: 'Weitere Adresse',
-      district: '',
-      city: '',
-      zip: '',
-      street: '',
-      isPrimary: false
+      type: "Weitere Adresse",
+      district: "",
+      city: "",
+      zip: "",
+      street: "",
+      isPrimary: false,
     };
-    setEditData(prev => ({
+    setEditData((prev) => ({
       ...prev,
-      addresses: [...prev.addresses, newAddress]
+      addresses: [...prev.addresses, newAddress],
     }));
   };
 
   const removeAddress = (addressId) => {
-    setEditData(prev => ({
+    setEditData((prev) => ({
       ...prev,
-      addresses: prev.addresses.filter(addr => addr.id !== addressId)
+      addresses: prev.addresses.filter((addr) => addr.id !== addressId),
     }));
   };
 
   const setPrimaryAddress = (addressId) => {
-    setEditData(prev => ({
+    setEditData((prev) => ({
       ...prev,
-      addresses: prev.addresses.map(addr => ({
+      addresses: prev.addresses.map((addr) => ({
         ...addr,
         isPrimary: addr.id === addressId,
-        type: addr.id === addressId ? 'Hauptadresse' : 
-              addr.type === 'Hauptadresse' ? 'Weitere Adresse' : addr.type
-      }))
+        type:
+          addr.id === addressId
+            ? "Hauptadresse"
+            : addr.type === "Hauptadresse"
+            ? "Weitere Adresse"
+            : addr.type,
+      })),
     }));
   };
 
@@ -103,14 +111,16 @@ const Profile = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         if (isEditing) {
-          setEditData(prev => ({ ...prev, profileImage: e.target.result }));
+          setEditData((prev) => ({ ...prev, profileImage: e.target.result }));
         }
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const currentAddresses = isEditing ? editData.addresses : profileData.addresses;
+  const currentAddresses = isEditing
+    ? editData.addresses
+    : profileData.addresses;
 
   return (
     <div className="profile-container">
@@ -150,10 +160,16 @@ const Profile = () => {
             <div className="profile-image-section">
               <div className="image-container">
                 <div className="profile-image">
-                  {(isEditing ? editData.profileImage : profileData.profileImage) ? (
-                    <img 
-                      src={isEditing ? editData.profileImage : profileData.profileImage} 
-                      alt="Profilbild" 
+                  {(
+                    isEditing ? editData.profileImage : profileData.profileImage
+                  ) ? (
+                    <img
+                      src={
+                        isEditing
+                          ? editData.profileImage
+                          : profileData.profileImage
+                      }
+                      alt="Profilbild"
                     />
                   ) : (
                     <div className="default-avatar">👤</div>
@@ -165,13 +181,14 @@ const Profile = () => {
                         type="file"
                         accept="image/*"
                         onChange={handleImageUpload}
-                        style={{ display: 'none' }}
+                        style={{ display: "none" }}
                       />
                     </label>
                   )}
                 </div>
                 <h2 className="profile-name">
-                  {isEditing ? editData.firstName : profileData.firstName} {isEditing ? editData.lastName : profileData.lastName}
+                  {isEditing ? editData.firstName : profileData.firstName}{" "}
+                  {isEditing ? editData.lastName : profileData.lastName}
                 </h2>
                 <p className="profile-username">
                   @{isEditing ? editData.username : profileData.username}
@@ -192,10 +209,14 @@ const Profile = () => {
                         <input
                           type="text"
                           value={editData.username}
-                          onChange={(e) => handleInputChange('username', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("username", e.target.value)
+                          }
                         />
                       ) : (
-                        <div className="input-display">{profileData.username}</div>
+                        <div className="input-display">
+                          {profileData.username}
+                        </div>
                       )}
                     </div>
                   </div>
@@ -206,7 +227,9 @@ const Profile = () => {
                         <input
                           type="email"
                           value={editData.email}
-                          onChange={(e) => handleInputChange('email', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("email", e.target.value)
+                          }
                         />
                       ) : (
                         <div className="input-display">{profileData.email}</div>
@@ -221,7 +244,9 @@ const Profile = () => {
                       <input
                         type="password"
                         value={editData.password}
-                        onChange={(e) => handleInputChange('password', e.target.value)}
+                        onChange={(e) =>
+                          handleInputChange("password", e.target.value)
+                        }
                       />
                     ) : (
                       <div className="input-display">••••••••••</div>
@@ -241,10 +266,14 @@ const Profile = () => {
                         <input
                           type="text"
                           value={editData.firstName}
-                          onChange={(e) => handleInputChange('firstName', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("firstName", e.target.value)
+                          }
                         />
                       ) : (
-                        <div className="input-display">{profileData.firstName}</div>
+                        <div className="input-display">
+                          {profileData.firstName}
+                        </div>
                       )}
                     </div>
                   </div>
@@ -255,10 +284,14 @@ const Profile = () => {
                         <input
                           type="text"
                           value={editData.lastName}
-                          onChange={(e) => handleInputChange('lastName', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("lastName", e.target.value)
+                          }
                         />
                       ) : (
-                        <div className="input-display">{profileData.lastName}</div>
+                        <div className="input-display">
+                          {profileData.lastName}
+                        </div>
                       )}
                     </div>
                   </div>
@@ -270,7 +303,7 @@ const Profile = () => {
                 <div className="addresses-header">
                   <h3 className="section-title">Adressen</h3>
                   {isEditing && (
-                    <button 
+                    <button
                       onClick={addNewAddress}
                       className=" btn-add-address"
                       type="button"
@@ -286,11 +319,17 @@ const Profile = () => {
                     <div key={address.id} className="address-card">
                       <div className="address-card-header">
                         <div className="address-title-section">
-                          <h4 className={`address-title ${address.isPrimary ? 'primary' : 'secondary'}`}>
+                          <h4
+                            className={`address-title ${
+                              address.isPrimary ? "primary" : "secondary"
+                            }`}
+                          >
                             {address.type}
                           </h4>
                           {address.isPrimary && (
-                            <span className="primary-indicator">Hauptadresse</span>
+                            <span className="primary-indicator">
+                              Hauptadresse
+                            </span>
                           )}
                         </div>
                         {isEditing && currentAddresses.length > 1 && (
@@ -309,7 +348,11 @@ const Profile = () => {
                               className="btn btn-address-remove"
                               type="button"
                               disabled={address.isPrimary}
-                              title={address.isPrimary ? "Hauptadresse kann nicht gelöscht werden" : "Adresse löschen"}
+                              title={
+                                address.isPrimary
+                                  ? "Hauptadresse kann nicht gelöscht werden"
+                                  : "Adresse löschen"
+                              }
                             >
                               Adresse entfernen
                             </button>
@@ -325,10 +368,18 @@ const Profile = () => {
                               <input
                                 type="text"
                                 value={address.street}
-                                onChange={(e) => handleAddressChange(address.id, 'street', e.target.value)}
+                                onChange={(e) =>
+                                  handleAddressChange(
+                                    address.id,
+                                    "street",
+                                    e.target.value
+                                  )
+                                }
                               />
                             ) : (
-                              <div className="input-display">{address.street}</div>
+                              <div className="input-display">
+                                {address.street}
+                              </div>
                             )}
                           </div>
                         </div>
@@ -341,10 +392,18 @@ const Profile = () => {
                                 <input
                                   type="text"
                                   value={address.zip}
-                                  onChange={(e) => handleAddressChange(address.id, 'zip', e.target.value)}
+                                  onChange={(e) =>
+                                    handleAddressChange(
+                                      address.id,
+                                      "zip",
+                                      e.target.value
+                                    )
+                                  }
                                 />
                               ) : (
-                                <div className="input-display">{address.zip}</div>
+                                <div className="input-display">
+                                  {address.zip}
+                                </div>
                               )}
                             </div>
                           </div>
@@ -355,10 +414,18 @@ const Profile = () => {
                                 <input
                                   type="text"
                                   value={address.city}
-                                  onChange={(e) => handleAddressChange(address.id, 'city', e.target.value)}
+                                  onChange={(e) =>
+                                    handleAddressChange(
+                                      address.id,
+                                      "city",
+                                      e.target.value
+                                    )
+                                  }
                                 />
                               ) : (
-                                <div className="input-display">{address.city}</div>
+                                <div className="input-display">
+                                  {address.city}
+                                </div>
                               )}
                             </div>
                           </div>
@@ -369,10 +436,18 @@ const Profile = () => {
                                 <input
                                   type="text"
                                   value={address.district}
-                                  onChange={(e) => handleAddressChange(address.id, 'district', e.target.value)}
+                                  onChange={(e) =>
+                                    handleAddressChange(
+                                      address.id,
+                                      "district",
+                                      e.target.value
+                                    )
+                                  }
                                 />
                               ) : (
-                                <div className="input-display">{address.district}</div>
+                                <div className="input-display">
+                                  {address.district}
+                                </div>
                               )}
                             </div>
                           </div>
@@ -384,6 +459,9 @@ const Profile = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="profile-content">
+          <UserPostsSection />
         </div>
       </div>
     </div>
