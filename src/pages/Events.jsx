@@ -3,11 +3,12 @@ import "./Events.css";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
+
 const events = [
   {
     id: 0,
     title: "🌞 Sommerfest 2025",
-    date: "22. August 2025",
+    date: "15.August 2025",
     location: "Stadtpark",
     description:
       "Ein buntes Sommerfest für Groß und Klein mit Musik, Essen und Spielen.",
@@ -31,13 +32,12 @@ const events = [
     location: "Altstadt",
     description:
       "Stöbern, schnuppern und entdecken – ein gemütlicher Sonntag in der Stadt.",
-    image:
-      "https://www.langschläfer-flohmarkt.de/s/cc_images/teaserbox_37858877.jpeg?t=1456511341",
+    image:"https://www.hamburg.de/resource/image/320460/landscape_ratio16x9/1240/697/385773cd062c26dd7913800b26480140/E744B4A823D8A6476B18DDCADBAE4CA9/mercado-in-altona.jpg",
   },
   {
     id: 3,
     title: "🎨 Kunst- und Handwerkermarkt",
-    date: "30. August 2025",
+    date: "30.August 2025",
     location: "Kunsthalle",
     description:
       "Lokale Künstler und Handwerker präsentieren ihre Werke – ein Fest für die Sinne!",
@@ -47,7 +47,7 @@ const events = [
   {
     id: 4,
     title: "🎶 Open-Air-Konzert",
-    date: "14. August 2025",
+    date: "22. August 2025",
     location: "Stadion",
     description:
       "Genieße Live-Musik unter freiem Himmel – ein unvergesslicher Abend!",

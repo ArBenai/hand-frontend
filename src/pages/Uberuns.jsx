@@ -8,7 +8,7 @@ import Rea from '../assets/personalphoto/Rea.avif';
 import Brian from '../assets/personalphoto/Brian.png';
 import Arben from '../assets/personalphoto/Arben.png';
 import Dagmar from '../assets/personalphoto/Dagmar.png';
-import city from '../assets/video/city.mp4';
+import menschen from '../assets/video/menschen.mp4';
 
 const Uberuns = () => {
   return (
@@ -40,7 +40,8 @@ const Uberuns = () => {
     <section className="video-section">
         <h2>Erlebe Nachbarschaft</h2>
         <video
-            src={city}
+            src={menschen}
+            alt="Menschen in der Nachbarschaft"
             type="video/mp4"
             controls
             muted
