@@ -18,7 +18,7 @@ const EventDetail = () => {
   const [text, setText] = useState('');
   const [comments, setComments] = useState([]);
   const [event, setEvent] = useState(eventFromState); // State to hold event data
-  const emojis = ['😊', '😂', '😍', '😢', '😡', '👍', '👏', '🙌', '🎉', '❤️'];
+  const emojis = ['😊', '😂', '😍', '😢', '😡', '👍', '👏', '🙌', '🎉', '❤️', '😏','💯','😕'];
   const [activeEmojiPicker, setActiveEmojiPicker] = useState(null);
 
   useEffect(() => {
@@ -188,7 +188,7 @@ return (
                   <p className="comment-text-display">{c.text}</p>
                   <div className="comment-actions">
                     <button onClick={() => handleLike(c.id)} title="Gefällt mir">
-                      {c.liked ? '💙' : '👍'}
+                      {c.liked ? '❤️ ' : '👍'}
                     </button>
                     <div style={{ position: 'relative' }}>
   <button onClick={() => setActiveEmojiPicker(c.id)} title="Emoji">😊</button>
