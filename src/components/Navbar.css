@@ -30,7 +30,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
- 
 }
 
 .navbar-container {
@@ -40,6 +39,7 @@
   align-items: center;
   width: 100%;
   max-width: 1300px;
+  height: 70px; /* Höhe der Navbar */
 }
 
 .navbar-logo {
