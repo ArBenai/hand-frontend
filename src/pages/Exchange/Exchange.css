@@ -432,9 +432,9 @@
 .comments-button {
   flex: 1 1 calc(50% - 5px); 
   min-width: 120px; 
-  padding: 5px 10px; 
+  padding: 3px 10px; 
   border-radius: 10px; 
-  font-size: 0.875rem; 
+  font-size: 0.9rem; 
   font-weight: 600;
   display: flex; 
   align-items: center;
@@ -450,8 +450,8 @@
 }
 
 .contact-button:hover:not(:disabled) {
-  background: var(--skyBlue); /* More vibrant hover color */
-  color: var(--white);
+  background: var(--deepBlue);
+  color: var(--coral);
   transform: translateY(-2px);
 }
 
