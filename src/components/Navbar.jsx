@@ -1,6 +1,6 @@
 import React from 'react';
 import './Navbar.css';
-import logo from '../assets/logo.png'; // Importiere das Logo, falls du es in der Navbar verwenden möchtest
+import logo from '../assets/logo.png'; 
 
 function Navbar() {
   return (

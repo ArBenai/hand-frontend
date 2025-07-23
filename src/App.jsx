@@ -1,22 +1,22 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home'; 
-import Navbar from './components/Navbar';
-import LandingPage from './pages/LandingPage';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Profile from './pages/Profile/Profile.jsx';
-import Events from './pages/Events';
-import EventDetail from './pages/EventDetail.jsx';
-import EventRegister from './pages/EventRegister.jsx';
-import Help from './pages/Help';
+import Home from './pages/Home/Home';
+import Login from './pages/Login-Register/Login';
+import Register from './pages/Login-Register/Register';
+import LandingPage from './pages/Home/LandingPage';
+import Help from './pages/Help/Help';
+import Events from './pages/Events/Events';
+import EventDetail from './pages/Events/EventDetail';
+import EventRegister from './pages/Events/EventRegister';
+import Profile from './pages/Profile/Profile';
 import Exchange from './pages/Exchange/Exchange';
 import ForgotPassword from './components/ForgotPassword';
-import ResetPassword from './components/ResetPassword.jsx';
-import Blog from './pages/Blog'; 
-import Uberuns from './pages/Uberuns.jsx'; 
-import Footer from './components/Footer.jsx'; 
-import PageNotFound from './pages/PageNotFound.jsx'; 
+import ResetPassword from './components/ResetPassword';
+import Blog from './pages/Blog/Blog';
+import Uberuns from './pages/UberUns/Uberuns';
+import PageNotFound from './components/PageNotFound';
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 
 function App() {
   return (

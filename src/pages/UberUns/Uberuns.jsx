@@ -1,14 +1,14 @@
 import './Uberuns.css';
-import image from '../assets/nachbarshaft.avif';
-import uberuns2 from '../assets/uberuns2.jpg';
-import uberuns3 from '../assets/uberuns3.jpg';
-import Nazli from '../assets/personalphoto/Nazli.png';
-import Dominik from '../assets/personalphoto/Dominik.png';
-import Rea from '../assets/personalphoto/Rea.avif';
-import Brian from '../assets/personalphoto/Brian.png';
-import Arben from '../assets/personalphoto/Arben.png';
-import Dagmar from '../assets/personalphoto/Dagmar.png';
-import menschen from '../assets/video/menschen.mp4';
+import image from '../../assets/nachbarshaft.avif';
+import uberuns2 from '../../assets/uberuns2.jpg';
+import uberuns3 from '../../assets/uberuns3.jpg';
+import Nazli from '../../assets/personalphoto/Nazli.png';
+import Dominik from '../../assets/personalphoto/Dominik.png';
+import Rea from '../../assets/personalphoto/Rea.avif';
+import Brian from '../../assets/personalphoto/Brian.png';
+import Arben from '../../assets/personalphoto/Arben.png';
+import Dagmar from '../../assets/personalphoto/Dagmar.png';
+import menschen from '../../assets/video/menschen.mp4';
 
 const Uberuns = () => {
   return (

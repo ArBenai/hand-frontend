@@ -1,9 +1,9 @@
 import { useState, useContext,useEffect } from 'react';
 import { useLocation,useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import {AuthContext}  from '../context/AuthContext.jsx';
+import {AuthContext}  from '../../context/AuthContext';
 import axios from 'axios';
-import logo from '../assets/logo.png'; 
+import logo from '../../assets/logo.png'; 
 import './EventDetail.css';
 
 import { useNavigate } from 'react-router-dom';

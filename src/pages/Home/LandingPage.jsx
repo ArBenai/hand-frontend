@@ -1,20 +1,20 @@
-import ImageCarousel from '../components/ImageCarousel';
+import ImageCarousel from '../../components/ImageCarousel';
 import './LandingPage.css';
 import React from 'react';
-import frage from "../assets/animation/Animation - frage.json";
-import telecom from '../assets/animation/Animation - 1751891973276.json';
-import tauschen from '../assets/animation/Animation - tauschen.json';
-import events from '../assets/animation/Animation - events.json';
+import frage from "../../assets/animation/Animation - frage.json";
+import telecom from '../../assets/animation/Animation - 1751891973276.json';
+import tauschen from '../../assets/animation/Animation - tauschen.json';
+import events from '../../assets/animation/Animation - events.json';
 
-import landingphoto1 from '../assets/landingphoto/landingphoto1.png';
-import landingphoto2 from '../assets/landingphoto/landingphoto2.png';
-import landingphoto3 from '../assets/landingphoto/landingphoto3.png';
-import landingphoto4 from '../assets/landingphoto/landingphoto4.png';
-import landingphoto5 from '../assets/landingphoto/landingphoto5.avif'
+import landingphoto1 from '../../assets/landingphoto/landingphoto1.png';
+import landingphoto2 from '../../assets/landingphoto/landingphoto2.png';
+import landingphoto3 from '../../assets/landingphoto/landingphoto3.png';
+import landingphoto4 from '../../assets/landingphoto/landingphoto4.png';
+import landingphoto5 from '../../assets/landingphoto/landingphoto5.avif'
 import Lottie from 'lottie-react';
-import city from '../assets/video/city.mp4';
+import city from '../../assets/video/city.mp4';
 import Countdown from 'react-countdown';
-import AktiveNachbarn from '../components/AktiveNachbarn';
+import AktiveNachbarn from '../../components/AktiveNachbarn';
 
 const landingphoto = [
   landingphoto1,
